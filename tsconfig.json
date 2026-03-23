@@ -1,0 +1,31 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
+    "outDir": "dist",
+    "rootDir": ".",
+    "strict": true,
+    "resolveJsonModule": true,
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "skipLibCheck": true,
+    "declaration": true,
+    "sourceMap": true
+  },
+  "include": [
+    "cli/index.ts",
+    "cli/interactive-search.ts",
+    "cli/interactive-skills.ts",
+    "cli/interactive-mcps.ts",
+    "cli/interactive-universal.ts",
+    "cli/banner.ts",
+    "core/router/recommend-repo.ts",
+    "shared/types/index.ts",
+    "shared/constants/*.json"
+  ],
+  "exclude": [
+    "dist",
+    "node_modules"
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "name": "solana-new",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Discover the Solana ecosystem — repos, skills, and MCP servers",
+  "type": "module",
+  "bin": {
+    "solana-new": "./dist/cli/index.js"
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "dev": "tsx cli/index.ts"
+  },
+  "devDependencies": {
+    "@types/node": "^22.13.14",
+    "tsx": "^4.20.0",
+    "typescript": "^5.8.2"
+  },
+  "engines": {
+    "node": ">=20.0.0"
+  }
+}

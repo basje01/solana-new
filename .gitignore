@@ -1,0 +1,49 @@
+node_modules
+dist
+.env
+.solana-new/
+.telemetry/
+
+# Build artifacts & test outputs
+test-solana-pay/
+tmp-smoke/
+test-cli-claude
+*.tsbuildinfo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Not shipped yet — experimental build pipeline
+convex/
+mcp/
+harnesses/
+qdrant/
+core/planner/
+core/executor/
+core/validator/
+core/scaffold/
+core/repair/
+core/telemetry/
+core/agents/
+core/knowledge/
+core/router/suggest-ecosystem.ts
+core/router/recommend-harness.ts
+cli/state.ts
+tests/
+scripts/
+shared/utils/
+shared/types/contracts.ts
+shared/types/*.schema.json
+shared/constants/harnesses.json
+shared/constants/market-catalog.json
+docs/market-catalog.md
+docs/testing-guide.md
+docs/runtime.md
+PRD.md
