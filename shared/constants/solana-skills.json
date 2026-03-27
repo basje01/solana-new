@@ -6,8 +6,8 @@
   "fetched_at": "2026-03-22T20:22:18.633Z",
   "install_all_command": "npx skills add https://github.com/solana-foundation/solana-dev-skill",
   "counts": {
-    "official": 14,
-    "community": 52
+    "official": 15,
+    "community": 55
   },
   "official_skills": [
     {
@@ -63,15 +63,15 @@
       "slug": "programs-anchor",
       "title": "Programs with Anchor",
       "description": "Write Solana programs using the Anchor framework for fast iteration, automatic account validation, and built-in TypeScript client generation.",
-      "github_url": "https://github.com/solana-foundation/solana-dev-skill/blob/main/skill/references/programs-anchor.md",
-      "raw_url": "https://raw.githubusercontent.com/solana-foundation/solana-dev-skill/main/skill/references/programs-anchor.md"
+      "github_url": "https://github.com/solana-foundation/solana-dev-skill/blob/main/skill/references/programs/anchor.md",
+      "raw_url": "https://raw.githubusercontent.com/solana-foundation/solana-dev-skill/main/skill/references/programs/anchor.md"
     },
     {
       "slug": "programs-pinocchio",
       "title": "Programs with Pinocchio",
       "description": "Build high-performance Solana programs with zero-copy techniques and minimal dependencies, without the solana-program overhead.",
-      "github_url": "https://github.com/solana-foundation/solana-dev-skill/blob/main/skill/references/programs-pinocchio.md",
-      "raw_url": "https://raw.githubusercontent.com/solana-foundation/solana-dev-skill/main/skill/references/programs-pinocchio.md"
+      "github_url": "https://github.com/solana-foundation/solana-dev-skill/blob/main/skill/references/programs/pinocchio.md",
+      "raw_url": "https://raw.githubusercontent.com/solana-foundation/solana-dev-skill/main/skill/references/programs/pinocchio.md"
     },
     {
       "slug": "resources",
@@ -91,15 +91,15 @@
       "slug": "surfpool-cheatcodes",
       "title": "Surfpool Cheatcodes",
       "description": "Full reference for all surfnet_* RPC methods to manipulate time, accounts, and programs in a local Surfpool network during testing.",
-      "github_url": "https://github.com/solana-foundation/solana-dev-skill/blob/main/skill/references/surfpool-cheatcodes.md",
-      "raw_url": "https://raw.githubusercontent.com/solana-foundation/solana-dev-skill/main/skill/references/surfpool-cheatcodes.md"
+      "github_url": "https://github.com/solana-foundation/solana-dev-skill/blob/main/skill/references/surfpool/cheatcodes.md",
+      "raw_url": "https://raw.githubusercontent.com/solana-foundation/solana-dev-skill/main/skill/references/surfpool/cheatcodes.md"
     },
     {
       "slug": "surfpool",
       "title": "Surfpool",
       "description": "A drop-in replacement for solana-test-validator with sub-second startup, automatic mainnet state cloning, transaction profiling, and a built-in web UI.",
-      "github_url": "https://github.com/solana-foundation/solana-dev-skill/blob/main/skill/references/surfpool.md",
-      "raw_url": "https://raw.githubusercontent.com/solana-foundation/solana-dev-skill/main/skill/references/surfpool.md"
+      "github_url": "https://github.com/solana-foundation/solana-dev-skill/blob/main/skill/references/surfpool/overview.md",
+      "raw_url": "https://raw.githubusercontent.com/solana-foundation/solana-dev-skill/main/skill/references/surfpool/overview.md"
     },
     {
       "slug": "testing",
@@ -107,6 +107,13 @@
       "description": "A testing pyramid for Solana programs using LiteSVM for fast unit tests, Mollusk for isolated instruction checks, and Surfpool for integration tests with realistic state.",
       "github_url": "https://github.com/solana-foundation/solana-dev-skill/blob/main/skill/references/testing.md",
       "raw_url": "https://raw.githubusercontent.com/solana-foundation/solana-dev-skill/main/skill/references/testing.md"
+    },
+    {
+      "slug": "kit",
+      "title": "@solana/kit Reference",
+      "description": "Comprehensive guide to @solana/kit — the modular, tree-shakable JavaScript SDK for Solana covering accounts, codecs, Codama codegen, plugins, React integration, and program interaction.",
+      "github_url": "https://github.com/solana-foundation/solana-dev-skill/tree/main/skill/references/kit",
+      "raw_url": "https://raw.githubusercontent.com/solana-foundation/solana-dev-skill/main/skill/references/kit/overview.md"
     }
   ],
   "community_skills": [
@@ -212,13 +219,6 @@
       "title": "PumpFun Skill",
       "description": "AI coding skill for PumpFun Protocol covering token launches, bonding curves, and PumpSwap integrations.",
       "url": "https://github.com/sendaifun/skills/tree/main/skills/pumpfun",
-      "category": null
-    },
-    {
-      "slug": "ranger-finance-skill",
-      "title": "Ranger Finance Skill",
-      "description": "AI coding skill for Ranger Finance, a Solana perps aggregator across Drift, Flash, and Jupiter.",
-      "url": "https://github.com/sendaifun/skills/tree/main/skills/ranger-finance",
       "category": null
     },
     {
@@ -512,6 +512,42 @@
       "url": "https://github.com/sendaifun/skills/tree/main/skills/magicblock",
       "category": {
         "labelKey": "gaming"
+      }
+    },
+    {
+      "slug": "helius-build-skill",
+      "title": "Helius Build Skill (Official)",
+      "description": "Official Helius skill for core Solana development — DAS API, Sender, WebSockets, LaserStream gRPC, webhooks, wallet API, and transaction analysis.",
+      "url": "https://github.com/helius-labs/core-ai/tree/main/helius-skills/helius",
+      "category": {
+        "labelKey": "infrastructure"
+      }
+    },
+    {
+      "slug": "helius-phantom-skill",
+      "title": "Helius x Phantom Skill (Official)",
+      "description": "Official Helius skill for frontend dApp development with Phantom Connect SDK — React, React Native, browser, token gating, and payments.",
+      "url": "https://github.com/helius-labs/core-ai/tree/main/helius-skills/helius-phantom",
+      "category": {
+        "labelKey": "infrastructure"
+      }
+    },
+    {
+      "slug": "helius-dflow-skill",
+      "title": "Helius x DFlow Skill (Official)",
+      "description": "Official Helius skill for trading applications — spot swaps, prediction markets, real-time streaming, and Proof KYC via DFlow.",
+      "url": "https://github.com/helius-labs/core-ai/tree/main/helius-skills/helius-dflow",
+      "category": {
+        "labelKey": "defi"
+      }
+    },
+    {
+      "slug": "helius-svm-skill",
+      "title": "Helius SVM Skill (Official)",
+      "description": "Official Helius skill for Solana protocol internals — SVM execution model, consensus, account model, validator economics, and token extensions.",
+      "url": "https://github.com/helius-labs/core-ai/tree/main/helius-skills/svm",
+      "category": {
+        "labelKey": "infrastructure"
       }
     }
   ],
