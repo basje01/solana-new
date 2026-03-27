@@ -89,11 +89,47 @@ function extractCloneUrl(command: string): string | null {
 
 // --- Config file generators ---
 
+function generateJourneySection(): string {
+  let md = `## Your Journey: Idea \u2192 Build \u2192 Launch\n\n`;
+  md += `This project comes with 9 pre-loaded skills that guide you from idea to production.\n`;
+  md += `Just ask naturally \u2014 the right skill activates based on your prompt.\n\n`;
+
+  md += `### Phase 1: Idea \u2014 Discovery & Planning\n`;
+  md += `| Prompt | What Happens |\n`;
+  md += `|--------|-------------|\n`;
+  md += `| "What should I build in crypto?" | Interviews you, ranks 3 ideas, writes shortlist HTML |\n`;
+  md += `| "Validate this idea" | Stress-tests with demand signals, produces go/no-go |\n`;
+  md += `| "Who are my competitors?" | Maps landscape, moats, and differentiation angles |\n`;
+  md += `| "Show me DeFi opportunities on Solana" | Research protocols and TVL trends via DefiLlama |\n\n`;
+
+  md += `### Phase 2: Build \u2014 Implementation\n`;
+  md += `| Prompt | What Happens |\n`;
+  md += `|--------|-------------|\n`;
+  md += `| "Scaffold my project" | Sets up workspace with right repos, skills, MCPs |\n`;
+  md += `| "Help me build the MVP" | Guides you milestone-by-milestone |\n`;
+  md += `| "Review my code" | Security audit + quality scores + specific fixes |\n\n`;
+
+  md += `### Phase 3: Launch \u2014 Go to Market\n`;
+  md += `| Prompt | What Happens |\n`;
+  md += `|--------|-------------|\n`;
+  md += `| "Deploy to mainnet" | Pre-flight checklist, RPC setup, verified deployment |\n`;
+  md += `| "Create a pitch deck" | 12-slide framework tailored to your audience |\n`;
+  md += `| "Prepare my hackathon submission" | Optimized description + 3-min demo script |\n\n`;
+
+  md += `> Each phase writes to \`.solana-new/\` so the next phase picks up context automatically.\n`;
+  md += `> You can skip phases or jump around \u2014 skills handle missing context gracefully.\n\n`;
+
+  return md;
+}
+
 function generateClaudeMd(input: WorkspaceSetupInput, projectName: string, selectedItems: SetupItem[]): string {
   const skills = selectedItems.filter(i => i.kind === "skill");
   const mcps = selectedItems.filter(i => i.kind === "mcp");
   let md = `# ${projectName}\n\n`;
   md += `## About\n${input.subcategoryLabel} \u2014 ${input.subcategoryDescription}\n\n`;
+
+  // Journey section — the core UX
+  md += generateJourneySection();
 
   // Always include Colosseum Copilot as the primary research tool
   md += `## Research with Colosseum Copilot\n`;
@@ -152,6 +188,7 @@ function generateClaudeMd(input: WorkspaceSetupInput, projectName: string, selec
   md += `- \`solana-new search <query>\` \u2014 find repos, skills, MCPs\n`;
   md += `- \`solana-new skills\` \u2014 browse available skills\n`;
   md += `- \`solana-new mcps\` \u2014 browse MCP servers\n`;
+  md += `- \`solana-new journey\` \u2014 see the full Idea \u2192 Build \u2192 Launch guide\n`;
 
   return md;
 }
@@ -334,9 +371,10 @@ function buildDoneScreen(
   }
   lines.push(`  ${BOLD}Generated:${RESET}  ${DIM}CLAUDE.md \u00b7 .cursorrules \u00b7 codex-instructions.md \u00b7 .env.example${RESET}`);
   lines.push("");
-  lines.push(`  ${YELLOW}${BOLD}Try asking your assistant:${RESET}`);
-  lines.push(`  ${DIM}"I want to build this with a unique angle. What${RESET}`);
-  lines.push(`  ${DIM} hasn't been done yet in this space?"${RESET}`);
+  lines.push(`  ${YELLOW}${BOLD}Start your journey — just ask:${RESET}`);
+  lines.push(`  ${DIM}"What should I build in crypto?"${RESET}           ${DIM}Idea${RESET}`);
+  lines.push(`  ${DIM}"Help me build the MVP"${RESET}                    ${DIM}Build${RESET}`);
+  lines.push(`  ${DIM}"Prepare my hackathon submission"${RESET}          ${DIM}Launch${RESET}`);
 
   const footer = [`  ${BOLD}enter${RESET} ${DIM}done${RESET}  ${DIM}q quit${RESET}`];
   while (lines.length < rows - footer.length) lines.push("");
@@ -356,6 +394,19 @@ export async function interactiveWorkspaceSetup(input: WorkspaceSetupInput): Pro
   const projectName = deriveProjectName(input.subcategoryLabel);
   const rec = input.recommendation;
 
+  // Journey skills — pre-loaded so the user never has to install them manually
+  const JOURNEY_SKILLS: { label: string; command: string }[] = [
+    { label: "Find Next Crypto Idea", command: "npx skills add sendaifun/solana-new/skills/idea/find-next-crypto-idea" },
+    { label: "Validate Idea", command: "npx skills add sendaifun/solana-new/skills/idea/validate-idea" },
+    { label: "Competitive Landscape", command: "npx skills add sendaifun/solana-new/skills/idea/competitive-landscape" },
+    { label: "Scaffold Project", command: "npx skills add sendaifun/solana-new/skills/build/scaffold-project" },
+    { label: "Build with Claude", command: "npx skills add sendaifun/solana-new/skills/build/build-with-claude" },
+    { label: "Review & Iterate", command: "npx skills add sendaifun/solana-new/skills/build/review-and-iterate" },
+    { label: "Deploy to Mainnet", command: "npx skills add sendaifun/solana-new/skills/launch/deploy-to-mainnet" },
+    { label: "Create Pitch Deck", command: "npx skills add sendaifun/solana-new/skills/launch/create-pitch-deck" },
+    { label: "Submit to Hackathon", command: "npx skills add sendaifun/solana-new/skills/launch/submit-to-hackathon" },
+  ];
+
   // Build items list (all pre-selected, Copilot always first)
   const items: SetupItem[] = [];
   items.push({
@@ -364,6 +415,10 @@ export async function interactiveWorkspaceSetup(input: WorkspaceSetupInput): Pro
     command: "npx skills add ColosseumOrg/colosseum-copilot",
     selected: true,
   });
+  // Journey skills — the full Idea → Build → Launch pipeline
+  for (const js of JOURNEY_SKILLS) {
+    items.push({ kind: "skill", label: js.label, command: js.command, selected: true });
+  }
   for (const s of rec.skills) {
     items.push({ kind: "skill", label: s.name, command: s.install, selected: true });
   }

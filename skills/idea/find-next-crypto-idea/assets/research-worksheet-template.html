@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>__TITLE__</title>
+    <style>
+      :root {
+        --bg: #f3efe6;
+        --paper: #fffaf3;
+        --ink: #16110d;
+        --muted: #60564b;
+        --line: rgba(22, 17, 13, 0.12);
+        --accent: #b44d1d;
+        --accent-soft: rgba(180, 77, 29, 0.1);
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        font-family: "Iowan Old Style", "Palatino Linotype", serif;
+        color: var(--ink);
+        background:
+          radial-gradient(circle at top right, rgba(180, 77, 29, 0.12), transparent 24%),
+          linear-gradient(180deg, #faf7f0 0%, var(--bg) 100%);
+      }
+
+      .shell {
+        width: min(1120px, calc(100vw - 32px));
+        margin: 0 auto;
+        padding: 28px 0 48px;
+      }
+
+      .hero,
+      .card {
+        background: rgba(255, 250, 243, 0.94);
+        border: 1px solid var(--line);
+        border-radius: 24px;
+      }
+
+      .hero {
+        padding: 24px;
+        margin-bottom: 20px;
+      }
+
+      .hero h1 {
+        margin: 0 0 8px;
+        font-size: clamp(2rem, 4vw, 3.1rem);
+        line-height: 0.95;
+      }
+
+      .hero p {
+        margin: 0;
+        max-width: 62ch;
+        color: var(--muted);
+      }
+
+      .meta {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-top: 16px;
+      }
+
+      .chip {
+        border-radius: 999px;
+        padding: 8px 12px;
+        background: var(--accent-soft);
+        color: var(--accent);
+        font-size: 0.9rem;
+      }
+
+      .grid {
+        display: grid;
+        gap: 18px;
+      }
+
+      .idea {
+        padding: 20px;
+      }
+
+      .idea h2 {
+        margin: 0 0 6px;
+        font-family: "Avenir Next Condensed", "Franklin Gothic Medium", sans-serif;
+      }
+
+      .idea p {
+        margin: 0 0 14px;
+        color: var(--muted);
+      }
+
+      .columns {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 14px;
+      }
+
+      .block {
+        padding: 14px;
+        border-radius: 18px;
+        border: 1px solid var(--line);
+        background: var(--paper);
+      }
+
+      .block h3 {
+        margin: 0 0 8px;
+        font-size: 1rem;
+        font-family: "Avenir Next Condensed", "Franklin Gothic Medium", sans-serif;
+      }
+
+      ul {
+        margin: 0;
+        padding-left: 18px;
+      }
+
+      li {
+        margin: 0 0 8px;
+      }
+
+      a {
+        color: var(--accent);
+      }
+
+      .note {
+        margin-top: 14px;
+        padding: 14px;
+        border-radius: 16px;
+        border: 1px dashed var(--line);
+        color: var(--muted);
+        background: rgba(22, 17, 13, 0.02);
+      }
+
+      @media (max-width: 860px) {
+        .columns {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="shell">
+      <section class="hero">
+        <h1 id="title"></h1>
+        <p id="subtitle"></p>
+        <div class="meta" id="meta"></div>
+      </section>
+      <section class="grid" id="ideas"></section>
+    </main>
+
+    <script>
+      const PACK = __DATA_JSON__;
+
+      function el(tag, className, text) {
+        const node = document.createElement(tag);
+        if (className) node.className = className;
+        if (text !== undefined && text !== null) node.textContent = text;
+        return node;
+      }
+
+      function queryList(items) {
+        const list = el("ul");
+        items.forEach((item) => {
+          const li = el("li");
+          const a = document.createElement("a");
+          a.href = item.url;
+          a.target = "_blank";
+          a.rel = "noreferrer";
+          a.textContent = item.query;
+          li.appendChild(a);
+          if (item.reason) {
+            li.appendChild(document.createTextNode(` — ${item.reason}`));
+          }
+          list.appendChild(li);
+        });
+        return list;
+      }
+
+      document.getElementById("title").textContent = "Live Research Worksheet";
+      document.getElementById("subtitle").textContent =
+        "Browser-first for X, web-first for everything else. Click the highest-signal queries first.";
+
+      const meta = document.getElementById("meta");
+      [
+        PACK.generated_at,
+        `browser: ${PACK.open_request?.browser || "default"}`,
+        `sources: ${(PACK.open_request?.sources || []).join(", ") || "none"}`
+      ]
+        .filter(Boolean)
+        .forEach((value) => meta.appendChild(el("span", "chip", value)));
+
+      const root = document.getElementById("ideas");
+      (PACK.ideas || []).forEach((idea) => {
+        const card = el("article", "card idea");
+        card.appendChild(el("h2", "", idea.name || "Untitled idea"));
+        card.appendChild(el("p", "", idea.one_liner || ""));
+
+        const cols = el("div", "columns");
+        [
+          ["X queries", idea.search_plan?.x || []],
+          ["GitHub queries", idea.search_plan?.github || []],
+          ["Web queries", idea.search_plan?.web || []]
+        ].forEach(([label, items]) => {
+          const block = el("section", "block");
+          block.appendChild(el("h3", "", label));
+          if (items.length) {
+            block.appendChild(queryList(items));
+          } else {
+            block.appendChild(el("div", "", "No queries generated."));
+          }
+          cols.appendChild(block);
+        });
+        card.appendChild(cols);
+
+        const note = el("div", "note");
+        note.innerHTML =
+          "<strong>Capture next:</strong> direct competitors, adjacent substitutes, OSS repos, complaint signals, and why-now signals.";
+        card.appendChild(note);
+        root.appendChild(card);
+      });
+    </script>
+  </body>
+</html>
