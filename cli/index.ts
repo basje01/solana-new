@@ -8,6 +8,7 @@ import { interactiveMcps, buildMcpsIndex, searchMcps, type McpsData } from "./in
 import mcpsData from "../shared/constants/solana-mcps.json" with { type: "json" };
 import { interactiveUniversalSearch, buildUniversalIndex } from "./interactive-universal.js";
 import { interactiveOnboarding, agentOnboarding, agentIdea } from "./interactive-onboarding.js";
+import { cmdInit } from "./init.js";
 import { interactiveWorkspaceSetup } from "./workspace-setup.js";
 import { getToken, saveToken, readConfig } from "./copilot-auth.js";
 import { verifyToken } from "./copilot-client.js";
@@ -370,6 +371,60 @@ async function cmdConfig(args: string[]): Promise<void> {
   console.log(`    solana-new config token <pat>   Set Copilot token directly\n`);
 }
 
+// --- Journey ---
+
+function journeyAgent(): void {
+  console.log(`Solana Developer Journey — Idea → Build → Launch`);
+  console.log(``);
+  console.log(`Phase 1: Idea — Discovery & Planning`);
+  console.log(`  find-next-crypto-idea    Interview and rank crypto startup ideas`);
+  console.log(`    claude "What should I build in crypto?"`);
+  console.log(`  validate-idea            Stress-test with demand signals, go/no-go`);
+  console.log(`    claude "Validate this idea — is it worth building?"`);
+  console.log(`  competitive-landscape    Map competitors and differentiation angles`);
+  console.log(`    claude "Who are my competitors in this space?"`);
+  console.log(`  defillama-research       DeFi protocol research using TVL data`);
+  console.log(`    claude "Show me DeFi opportunities on Solana using TVL data"`);
+  console.log(``);
+  console.log(`Phase 2: Build — Implementation`);
+  console.log(`  scaffold-project         Set up workspace with right stack`);
+  console.log(`    claude "Scaffold my project"`);
+  console.log(`  build-with-claude        Guided MVP implementation`);
+  console.log(`    claude "Help me build the MVP"`);
+  console.log(`  review-and-iterate       Code review + security audit`);
+  console.log(`    claude "Review my code for production readiness"`);
+  console.log(``);
+  console.log(`Phase 3: Launch — Go to Market`);
+  console.log(`  deploy-to-mainnet        Production deployment checklist`);
+  console.log(`    claude "Deploy to mainnet"`);
+  console.log(`  create-pitch-deck        Structured pitch deck generator`);
+  console.log(`    claude "Create a pitch deck for hackathon judges"`);
+  console.log(`  submit-to-hackathon      Hackathon submission builder`);
+  console.log(`    claude "Prepare my hackathon submission"`);
+  console.log(``);
+  console.log(`Skills auto-installed to ~/.claude/skills/ via: solana-new init`);
+  console.log(`Select and launch directly: solana-new journey`);
+}
+
+async function cmdJourney(args: string[]): Promise<void> {
+  const { flags } = parseFlags(args);
+
+  if (flags.agent === true) {
+    journeyAgent();
+    return;
+  }
+
+  // Interactive TUI
+  if (process.stdin.isTTY) {
+    const { interactiveJourney } = await import("./interactive-journey.js");
+    await interactiveJourney();
+    return;
+  }
+
+  // Non-TTY fallback
+  journeyAgent();
+}
+
 // --- Help ---
 
 function printUsage(): void {
@@ -388,6 +443,24 @@ function printUsage(): void {
   row(`${BOLD}repos${RESET} ${DIM}[--search <q>]${RESET}`,                                 "Browse / filter repos");
   row(`${BOLD}skills${RESET} ${DIM}[--search <q>]${RESET}`,                                "Browse / filter skills");
   row(`${BOLD}config${RESET} ${DIM}[token]${RESET}`,                                       "Manage Copilot token + settings");
+  console.log(`  ${BOLD}Get Started${RESET}`);
+  console.log("");
+  row(`${BOLD}init${RESET}`,                                                "Install 9 journey skills → open Claude Code → go");
+  row(`${BOLD}journey${RESET}`,                                             "Idea → Build → Launch guide with example prompts");
+  console.log("");
+  console.log(`  ${BOLD}Discover${RESET}  ${DIM}— explore the Solana ecosystem${RESET}`);
+  console.log("");
+  row(`${BOLD}start${RESET}`,                                               "What do you want to build? (guided onboarding)");
+  row(`${BOLD}<query>${RESET}`,                                             "Search anything — repos, skills, mcps");
+  row("search",                                            "Interactive universal search");
+  row(`repos ${DIM}[--search <q>] [--category <cat>]${RESET}`,           "Browse or filter repos");
+  row(`skills ${DIM}[--search <q>]${RESET}`,                             "Browse or filter skills");
+  row(`mcps ${DIM}[--search <q>]${RESET}`,                               "Browse or filter MCP servers");
+  console.log("");
+  console.log(`  ${BOLD}Config${RESET}`);
+  console.log("");
+  row(`config`,                                              "Show current config");
+  row(`config token`,                                        "Update Colosseum Copilot token");
   console.log("");
   console.log(`  ${DIM}All commands support ${BOLD}--agent${RESET}${DIM} for machine-readable output${RESET}`);
   console.log("");
@@ -404,8 +477,10 @@ async function main(): Promise<void> {
     return;
   }
 
+  if (command === "init") { const { flags } = parseFlags(args); return cmdInit(args, flags); }
   if (command === "start") return cmdStart(args);
   if (command === "idea" || command === "landscape") return cmdIdea(args);
+  if (command === "journey") return cmdJourney(args);
   if (command === "search") return cmdSearch(args);
   if (command === "repos") return cmdRepos(args);
   if (command === "skills") return cmdSkills(args);

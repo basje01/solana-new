@@ -7,9 +7,19 @@
   "bin": {
     "solana-new": "./dist/cli/index.js"
   },
+  "files": [
+    "dist/",
+    "skills/idea/",
+    "skills/build/",
+    "skills/launch/",
+    "skills/data/",
+    "skills/README.md",
+    "shared/"
+  ],
   "scripts": {
     "build": "tsc -p tsconfig.json",
-    "dev": "tsx cli/index.ts"
+    "dev": "tsx cli/index.ts",
+    "postinstall": "node dist/cli/index.js init --agent 2>/dev/null || true"
   },
   "devDependencies": {
     "@types/node": "^22.13.14",

@@ -1,0 +1,103 @@
+---
+name: find-next-crypto-idea
+description: Interview users sharply to discover, rank, or validate what they should build in crypto. Use when a user asks what to build in crypto, wants startup ideas in a crypto niche such as DeFi or AI x crypto, wants blunt feedback on an existing crypto idea, or wants a concrete artifact comparing the best next ideas. Treat the bundled idea datasets as inspiration, not constraints, and always combine them with fresh market research.
+---
+
+# Find Next Crypto Idea
+
+## Overview
+
+Interview the user until there is real clarity, not just enthusiasm. Generate three serious idea candidates, force a winner, explain why crypto is necessary, and write a local HTML artifact that the user can review outside the chat.
+
+## Workflow
+
+1. Infer whether the user needs fresh ideas, a narrowed idea search in a known domain, or validation of an existing thesis.
+2. Read [references/source-map.md](references/source-map.md) first to understand the local datasets available to this skill.
+3. Read [references/interview-framework.md](references/interview-framework.md) before asking substantive questions.
+4. Gate every candidate through [references/crypto-necessity-test.md](references/crypto-necessity-test.md) before scoring it.
+5. Score surviving candidates with [references/scoring-rubric.md](references/scoring-rubric.md).
+6. Run fresh research with [references/research-playbook.md](references/research-playbook.md). When you already have candidate ideas, use `scripts/live_research.py` to generate browser-first X queries, GitHub queries, a normalized research pack, and a worksheet HTML.
+7. Produce the shortlist artifact first. Let the user pick one. Then deepen the chosen idea and write a second artifact.
+
+## Non-Negotiables
+
+- Stay blunt. Challenge weak assumptions before elaborating them.
+- Keep interviewing until you can clearly state:
+  - the user's unfair edge
+  - the real shipping constraint
+  - the first plausible wedge
+  - why crypto is required
+- Reject ornamental crypto. Redirect to a stronger crypto angle instead of dressing up a weak one.
+- Do not praise a bad idea because the user is attached to it.
+- Do not produce three near-identical ideas. Force diversity across the shortlist when possible.
+- Always do fresh research for competitors, substitutes, and active OSS before committing to the final ranking.
+- Always write a local HTML file. Do not leave the result only in chat.
+
+## Interview Rules
+
+- Start with anchor questions, not a giant questionnaire.
+- Pull constraints only when they would change the recommendation.
+- Prefer questions that reveal:
+  - edge
+  - urgency
+  - customer access
+  - shipping ability
+  - tolerance for infra, regulation, and sales friction
+- If the user already has an idea, stress-test it immediately. Ask what breaks if the blockchain is removed.
+- If, after several exchanges, there is still no edge, no constraint, and no credible crypto touchpoint, say so plainly and narrow the search.
+
+## Shortlist Rules
+
+- Produce exactly three serious candidates unless the user explicitly asks for more.
+- Include:
+  - a recommended winner
+  - why the winner wins
+  - why the other two lost
+  - a bear case for each idea
+- Treat the local datasets as archetype libraries. Combine, mutate, or discard them freely if the user's context demands it.
+
+## Artifact Rules
+
+- Read [references/output-spec.md](references/output-spec.md) before writing the report payload.
+- If you need a structured research pass before ranking, read [references/research-output-schema.md](references/research-output-schema.md) and run `scripts/live_research.py`.
+- Use `scripts/render_report.py` to render the HTML from a JSON payload.
+- Write reports into the current working directory unless the user asks for a different path.
+- Use file names like:
+  - `idea-shortlist-YYYYMMDD-HHMMSS.html`
+  - `idea-deep-dive-YYYYMMDD-HHMMSS.html`
+
+## Phase Handoff
+
+This skill is **Phase 1 (Idea)** in the Idea → Build → Launch journey. After the user picks a winner from the shortlist:
+
+1. Write `.solana-new/idea-context.json` in the project workspace with:
+   - `phase`: `"idea"`
+   - `completed_at`: ISO timestamp
+   - `chosen_idea`: slug, name, one_liner, why_crypto, scores, competitors, mvp_checklist, gtm
+   - `source_reports`: list of generated HTML filenames
+2. Tell the user they can proceed to the **Build** phase next:
+   - `scaffold-project` — set up workspace with the right stack
+   - `build-with-claude` — guided MVP implementation
+3. See `../../../data/specs/phase-handoff.md` for the full JSON contract.
+
+## Resources
+
+### references/
+
+- [references/source-map.md](references/source-map.md)
+- [references/interview-framework.md](references/interview-framework.md)
+- [references/crypto-necessity-test.md](references/crypto-necessity-test.md)
+- [references/scoring-rubric.md](references/scoring-rubric.md)
+- [references/research-playbook.md](references/research-playbook.md)
+- [references/research-output-schema.md](references/research-output-schema.md)
+- [references/output-spec.md](references/output-spec.md)
+
+### scripts/
+
+- `scripts/render_report.py` renders the final HTML artifact from structured JSON.
+- `scripts/live_research.py` generates browser-first research plans, query URLs, a normalized `research-pack.json`, and an optional worksheet HTML.
+
+### assets/
+
+- `assets/report-template.html` is the HTML template used by the render script.
+- `assets/research-worksheet-template.html` is the HTML template for the clickable research worksheet.
