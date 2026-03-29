@@ -363,7 +363,9 @@ async function cmdConfig(args: string[]): Promise<void> {
     return;
   }
 
-  const sub = positional[0];
+  // Support both `copilot token <pat>` and `copilot --token <pat>`
+  const sub = positional[0] || (flags.token ? "token" : undefined);
+  const flagToken = typeof flags.token === "string" ? flags.token : undefined;
 
   if (!sub || sub === "show") {
     const config = readConfig();
@@ -388,7 +390,7 @@ async function cmdConfig(args: string[]): Promise<void> {
   }
 
   if (sub === "token") {
-    const tokenValue = positional[1];
+    const tokenValue = positional[1] || flagToken;
     if (!tokenValue) {
       const { createInterface } = await import("node:readline");
       const rl = createInterface({ input: process.stdin, output: process.stdout });

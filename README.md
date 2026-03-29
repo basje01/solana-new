@@ -123,7 +123,7 @@ cp .env.example .env
 | `CONVEX_URL` | Dev Convex deployment URL |
 | `PROD_CONVEX_URL` | Prod Convex deployment URL |
 
-Get your deployment URLs from [dashboard.convex.dev](https://dashboard.convex.dev). `.env` is gitignored, `.env.example` is committed.
+Get your deployment URLs from [dashboard.convex.dev](https://dashboard.convex.dev).
 
 ### Convex Backend
 
@@ -133,8 +133,6 @@ Feedback is stored in Convex. Schema and mutations are in `convex/`.
 npx convex dev --once       # push functions to dev
 npx convex deploy           # push functions to prod
 ```
-
-Both `CONVEX_URL` (dev) and `PROD_CONVEX_URL` (prod) must be set in `.env`. The CLI uses `CONVEX_URL` when set, otherwise falls back to `PROD_CONVEX_URL`. Without either, feedback silently skips.
 
 ## Project Structure
 
