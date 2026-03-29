@@ -77,8 +77,6 @@ skills/
   build/                    Implementation skills (10 skills)
   launch/                   Go-to-market skills (3 skills)
   data/                     Datasets, catalogs, phase handoff spec
-core/
-  router/recommend-repo.ts  Repo search, filter by category/keyword
 ```
 
 ## Conventions

@@ -21,7 +21,6 @@
     "cli/interactive-universal.ts",
     "cli/interactive-onboarding.ts",
     "cli/banner.ts",
-    "core/router/recommend-repo.ts",
     "cli/data/*.json"
   ],
   "exclude": [

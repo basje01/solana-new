@@ -1,4 +1,4 @@
-import type { ClonableRepo } from "../core/router/recommend-repo.js";
+import type { ClonableRepo } from "./repos.js";
 
 const RESET = "\x1b[0m";
 const DIM = "\x1b[2m";

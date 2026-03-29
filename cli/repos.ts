@@ -1,4 +1,4 @@
-import repoData from "../../cli/data/clonable-repos.json" with { type: "json" };
+import repoData from "./data/clonable-repos.json" with { type: "json" };
 
 export interface ClonableRepo {
   id: string;

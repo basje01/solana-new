@@ -3,7 +3,7 @@ import process from "node:process";
 import { readFileSync } from "node:fs";
 import { join, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
-import { listReposByCategory, searchRepos, type ClonableRepo } from "../core/router/recommend-repo.js";
+import { listReposByCategory, searchRepos, type ClonableRepo } from "./repos.js";
 import { interactiveSearch } from "./interactive-search.js";
 import { interactiveSkills, buildSkillsIndex, searchSkills, type SkillsData } from "./interactive-skills.js";
 import skillsData from "./data/solana-skills.json" with { type: "json" };

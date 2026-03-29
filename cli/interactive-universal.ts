@@ -1,4 +1,4 @@
-import type { ClonableRepo } from "../core/router/recommend-repo.js";
+import type { ClonableRepo } from "./repos.js";
 import type { SkillsData } from "./interactive-skills.js";
 import type { McpsData, McpItem } from "./interactive-mcps.js";
 
