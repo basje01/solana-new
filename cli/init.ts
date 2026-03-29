@@ -90,25 +90,31 @@ function installSkillsGlobal(agent: boolean): { installed: string[]; skipped: st
 }
 
 function generateProjectClaudeMd(): string {
-  let md = `# Solana Project\n\n`;
+  let md = `# Solana Project — Colosseum Hackathon\n\n`;
   md += `## Your Journey: Idea → Build → Launch\n\n`;
-  md += `9 skills are pre-loaded. Just ask naturally.\n\n`;
+  md += `16 skills are pre-loaded. Just ask naturally.\n\n`;
 
-  md += `### Phase 1: Idea\n`;
-  md += `- "What should I build in crypto?" — discover and rank ideas\n`;
-  md += `- "Validate this idea" — stress-test with demand signals\n`;
-  md += `- "Who are my competitors?" — map the landscape\n`;
-  md += `- "Show me DeFi opportunities on Solana" — TVL research via DefiLlama\n\n`;
+  md += `### Phase 1: Idea — Discovery & Planning\n`;
+  md += `- "What should I build on Solana for the Colosseum hackathon?" — discover and rank ideas\n`;
+  md += `- "Validate this Solana project idea" — stress-test with on-chain demand signals\n`;
+  md += `- "Who are my competitors in the Solana ecosystem?" — map protocols and gaps\n`;
+  md += `- "Show me DeFi opportunities on Solana using TVL data" — research via DefiLlama\n\n`;
 
-  md += `### Phase 2: Build\n`;
-  md += `- "Scaffold my project" — set up workspace with right stack\n`;
-  md += `- "Help me build the MVP" — guided implementation\n`;
-  md += `- "Review my code" — security audit + quality review\n\n`;
+  md += `### Phase 2: Build — Solana Implementation\n`;
+  md += `- "Scaffold my Solana project with Anchor" — Anchor + SDK project setup\n`;
+  md += `- "Help me build the Solana MVP step by step" — guided implementation\n`;
+  md += `- "Build a DeFi protocol on Solana" — AMM, lending, vault with CPIs and PDAs\n`;
+  md += `- "Build a Solana Action / Blink" — shareable transaction links\n`;
+  md += `- "Launch an SPL token on Solana" — token mint, metadata, distribution\n`;
+  md += `- "Build a Solana data pipeline" — indexer, webhook, analytics\n`;
+  md += `- "Build a Solana mobile app" — React Native + mobile wallet adapter\n`;
+  md += `- "Debug my failing Solana program" — diagnose program errors and failed TXs\n`;
+  md += `- "Review my Solana program for security" — audit for exploits and best practices\n\n`;
 
-  md += `### Phase 3: Launch\n`;
-  md += `- "Deploy to mainnet" — production checklist\n`;
-  md += `- "Create a pitch deck" — tailored to your audience\n`;
-  md += `- "Prepare my hackathon submission" — optimized for judges\n\n`;
+  md += `### Phase 3: Launch — Hackathon Submission\n`;
+  md += `- "Deploy my Solana program to mainnet" — pre-flight checklist + verification\n`;
+  md += `- "Create a pitch deck for Colosseum judges" — 12-slide hackathon framework\n`;
+  md += `- "Prepare my Colosseum hackathon submission" — optimized for judges\n\n`;
 
   md += `> Each phase writes context to \`.solana-new/\` so the next phase picks up automatically.\n\n`;
 
@@ -131,7 +137,7 @@ export async function cmdInit(args: string[], flags: Record<string, string | boo
 
   if (agent) {
     // Machine-readable output for Claude Code / Codex
-    console.log(`solana-new init — ${total} journey skills`);
+    console.log(`solana-new init — ${total} skills (Colosseum hackathon)`);
     console.log(``);
     if (installed.length > 0) {
       console.log(`Installed ${installed.length} skills to ~/.claude/skills/:`);
@@ -184,7 +190,7 @@ export async function cmdInit(args: string[], flags: Record<string, string | boo
 
   if (!agent) {
     console.log(`  ${YELLOW}${BOLD}Launch Claude Code:${RESET}`);
-    console.log(`  ${MAGENTA}$ solana-new journey${RESET}  ${DIM}pick a skill → opens Claude Code with prompt${RESET}`);
+    console.log(`  ${MAGENTA}$ solana-new ship${RESET}  ${DIM}pick a skill → opens Claude Code with prompt${RESET}`);
     console.log(`  ${MAGENTA}$ claude "What should I build in crypto?"${RESET}`);
     console.log(``);
   }

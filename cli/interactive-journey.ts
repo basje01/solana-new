@@ -21,67 +21,82 @@ const PHASES: JourneyPhase[] = [
     skills: [
       {
         name: "find-next-crypto-idea",
-        prompt: "What should I build in crypto?",
-        description: "Interview you to discover and rank 3 crypto startup ideas",
+        prompt: "What should I build on Solana for the Colosseum hackathon?",
+        description: "Interview you to discover and rank 3 Solana project ideas",
       },
       {
         name: "validate-idea",
-        prompt: "Validate this idea — is it worth building?",
-        description: "Stress-test with demand signals, produce go/no-go",
+        prompt: "Validate this Solana project idea — is it worth building?",
+        description: "Stress-test with on-chain demand signals, produce go/no-go",
       },
       {
         name: "competitive-landscape",
-        prompt: "Who are my competitors in this space?",
-        description: "Map competitors, moats, and differentiation angles",
+        prompt: "Who are my competitors in the Solana ecosystem?",
+        description: "Map existing Solana protocols, moats, and gaps",
       },
       {
         name: "defillama-research",
         prompt: "Show me DeFi opportunities on Solana using TVL data",
-        description: "Research protocols, TVL trends, and gaps using DefiLlama",
+        description: "Research Solana protocols, TVL trends, and underserved niches",
       },
     ],
   },
   {
-    label: "Build — Implementation",
+    label: "Build — Solana Implementation",
     icon: "◇",
     color: CYAN,
     skills: [
       {
         name: "scaffold-project",
-        prompt: "Scaffold my project",
-        description: "Set up workspace with the right repos, skills, and MCPs",
+        prompt: "Scaffold my Solana project with Anchor and the right stack",
+        description: "Set up workspace with Anchor, SDK, and Solana-specific tooling",
       },
       {
         name: "build-with-claude",
-        prompt: "Help me build the MVP",
-        description: "Guide you through implementation milestone-by-milestone",
+        prompt: "Help me build the Solana MVP step by step",
+        description: "Guided implementation with Anchor programs + client SDK",
+      },
+      {
+        name: "build-defi-protocol",
+        prompt: "Build a DeFi protocol on Solana — AMM, lending, or vault",
+        description: "Guided DeFi build with CPIs, PDAs, and token math",
+      },
+      {
+        name: "build-data-pipeline",
+        prompt: "Build a Solana data pipeline — indexer, webhook, or analytics",
+        description: "Index accounts, track transactions, real-time Solana data",
+      },
+      {
+        name: "build-mobile",
+        prompt: "Build a Solana mobile app with React Native",
+        description: "Mobile wallet adapter, transaction signing, mobile dApp",
       },
       {
         name: "review-and-iterate",
-        prompt: "Review my code",
-        description: "Security audit + quality scores + specific fixes",
+        prompt: "Review my Solana program for security and production readiness",
+        description: "Audit Anchor program for exploits, overflows, and best practices",
       },
     ],
   },
   {
-    label: "Launch — Go to Market",
+    label: "Launch — Hackathon Submission",
     icon: "◈",
     color: GREEN,
     skills: [
       {
         name: "deploy-to-mainnet",
-        prompt: "Deploy to mainnet",
-        description: "Pre-flight checklist, RPC setup, verified deployment",
+        prompt: "Deploy my Solana program to mainnet",
+        description: "Pre-flight checklist, RPC setup, program verification",
       },
       {
         name: "create-pitch-deck",
-        prompt: "Create a pitch deck",
-        description: "12-slide framework tailored to your audience",
+        prompt: "Create a pitch deck for Colosseum hackathon judges",
+        description: "12-slide framework tailored for Solana hackathon judging",
       },
       {
         name: "submit-to-hackathon",
-        prompt: "Prepare my hackathon submission",
-        description: "Optimized description + 3-min demo script",
+        prompt: "Prepare my Colosseum hackathon submission",
+        description: "Optimized project description + 3-min demo script",
       },
     ],
   },
@@ -93,8 +108,7 @@ function buildScreen(selectedPhase: number, selectedSkill: number, rows: number)
   lines.push("");
   lines.push(`  ${GRADIENT_SOLANA_DOT_NEW}  ${BOLD}Developer Journey${RESET}  ${DIM}Idea \u2192 Build \u2192 Launch${RESET}`);
   lines.push("");
-  lines.push(`  ${DIM}All 9 skills are pre-installed.${RESET}`);
-  lines.push(`  ${DIM}Select a skill and press Enter to launch Claude Code.${RESET}`);
+  lines.push(`  ${DIM}Select a prompt and press Enter to launch Claude Code with solana-new cli.${RESET}`);
   lines.push("");
 
   for (let p = 0; p < PHASES.length; p++) {

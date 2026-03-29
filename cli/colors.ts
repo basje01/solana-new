@@ -1,16 +1,20 @@
 // Shared ANSI escape codes and gradient utilities
 
-export const RESET = "\x1b[0m";
-export const DIM = "\x1b[2m";
-export const BOLD = "\x1b[1m";
-export const CYAN = "\x1b[36m";
-export const GREEN = "\x1b[32m";
-export const YELLOW = "\x1b[33m";
-export const MAGENTA = "\x1b[35m";
-export const BLUE = "\x1b[34m";
-export const RED = "\x1b[31m";
+// Respect NO_COLOR convention (https://no-color.org/) and --no-color flag
+const NO_COLOR = !!(process.env.NO_COLOR || process.argv.includes("--no-color"));
+function c(code: string): string { return NO_COLOR ? "" : code; }
 
-// Terminal control sequences
+export const RESET = c("\x1b[0m");
+export const DIM = c("\x1b[2m");
+export const BOLD = c("\x1b[1m");
+export const CYAN = c("\x1b[36m");
+export const GREEN = c("\x1b[32m");
+export const YELLOW = c("\x1b[33m");
+export const MAGENTA = c("\x1b[35m");
+export const BLUE = c("\x1b[34m");
+export const RED = c("\x1b[31m");
+
+// Terminal control sequences (functional, not cosmetic — always enabled)
 export const ALT_SCREEN_ON = "\x1b[?1049h";
 export const ALT_SCREEN_OFF = "\x1b[?1049l";
 export const CURSOR_HIDE = "\x1b[?25l";
@@ -24,6 +28,7 @@ const GRADIENT_STOPS: Array<[number, number, number]> = [
 ];
 
 export function gradientLine(text: string): string {
+  if (NO_COLOR) return text;
   const chars = text.split("");
   const step = (GRADIENT_STOPS.length - 1) / Math.max(chars.length - 1, 1);
   return chars.map((c, i) => {
