@@ -53,6 +53,21 @@ When doing fresh research, fetch these for up-to-date Solana ecosystem context:
   - Use to identify infrastructure gaps, emerging primitives, and what infra builders care about
   - Fetch the blog index page and scan recent post titles for relevant trends
 
+- **Twitter/X Trends via bird.fast** — `npx bird`
+  - CLI that uses your browser session to search X/Twitter
+  - Search for crypto/Solana trending topics to validate demand signals
+  - Commands: `bird search "solana defi"`, `bird search "crypto AI"`, `bird trending`
+  - Compare your idea against what builders and users are talking about right now
+  - Install: `npm i -g bird.fast` or use `npx bird` one-shot
+  - Requires browser session cookies (Safari/Chrome/Firefox) — run `bird whoami` to verify
+
+### How to Use bird.fast for Idea Validation
+
+1. **Trend scan**: `bird search "solana <your-niche>"` — see what people are building/requesting
+2. **Demand signals**: `bird search "<problem your idea solves>"` — look for complaints, wishlists
+3. **Competitor buzz**: `bird search "<competitor name> solana"` — gauge traction
+4. **Compare**: Cross-reference trending topics with your idea shortlist to prioritize ideas with real-time buzz
+
 ## Usage Rules
 
 - Do not blindly copy ideas from the datasets.

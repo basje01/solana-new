@@ -22,6 +22,18 @@ How to evaluate whether demand signals are real or noise.
 | VC interest without user pull | Investors follow narratives, users follow utility |
 | Hackathon prize for the category | Prize money ≠ product-market fit |
 
+## Live Signal Check with bird.fast
+
+If `bird.fast` is available (`npx bird whoami`), use it to gather real-time X/Twitter signals:
+
+```bash
+bird search "solana <your-idea-keyword>"     # are people talking about it?
+bird search "<problem> crypto"               # are people complaining?
+bird search "<competitor>"                   # how much buzz do alternatives have?
+```
+
+Cross-reference results with the rubric above — tweets with complaints, workarounds, or "why doesn't X exist" are strong signals. Hype threads and engagement farming are weak signals.
+
 ## Scoring
 
 - **3 — Strong**: Multiple strong signals from independent sources

@@ -37,7 +37,13 @@ python3 scripts/live_research.py shortlist.json \
 3. official docs, company sites, protocol docs
 4. broader web search
 
-If browser-based X search is available, prefer it over generic web search. If X cannot be accessed reliably, say so and fall back to web search plus official sources.
+If `bird.fast` is installed (`npx bird whoami` succeeds), use it for direct X search:
+```bash
+bird search "solana <niche>"          # trend scan
+bird search "<problem>"               # demand signals
+bird search "<competitor> solana"     # competitor buzz
+```
+This gives structured results without opening a browser. If bird.fast is not available, fall back to browser-based X search. If neither works, use web search plus official sources.
 
 ## What To Look For
 
