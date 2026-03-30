@@ -24,7 +24,7 @@ This skill depends on build context from scaffold/build.
 
 1. If `.solana-new/build-context.json` is missing:
    - Tell the user to run `scaffold-project` then `build-with-claude` first.
-   - Provide exact order: `solana-new copilot start "your idea"` → `scaffold-project` → `build-with-claude` → `review-and-iterate`.
+   - Provide exact order: `solana-new copilot "your idea"` → `scaffold-project` → `build-with-claude` → `review-and-iterate`.
 2. If build context exists but `build_status` is missing, repair it before review.
 3. If there is no code to review yet, explicitly stop and redirect to `build-with-claude`.
 

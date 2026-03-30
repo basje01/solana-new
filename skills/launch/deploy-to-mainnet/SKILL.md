@@ -25,7 +25,7 @@ This skill should not run as the first launch action.
 1. Require `.solana-new/build-context.json`.
 2. Require `build_status.tests_passing = true` and `build_status.devnet_deployed = true`.
 3. If either is missing/false, stop and redirect with exact order:
-   - `solana-new copilot start "your idea"`
+   - `solana-new copilot "your idea"`
    - `scaffold-project`
    - `build-with-claude`
    - `review-and-iterate`

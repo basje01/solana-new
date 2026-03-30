@@ -29,7 +29,7 @@ Before scaffolding, enforce this dependency rule:
 
 1. If `.solana-new/idea-context.json` exists, proceed.
 2. If it is missing, do this first:
-   - Tell the user: "Run `solana-new copilot start \"your idea\"` first so we can generate `idea-context.json`."
+   - Tell the user: "Run `solana-new copilot \"your idea\"` first so we can generate `idea-context.json`."
    - Provide one concrete example prompt they can run immediately.
 3. Only continue without `idea-context.json` if the user explicitly asks to proceed anyway.
 4. If proceeding without it, collect the minimum required fields and create `.solana-new/idea-context.json` before writing `build-context.json`.

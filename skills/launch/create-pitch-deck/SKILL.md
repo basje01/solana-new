@@ -27,7 +27,7 @@ This skill depends on journey context for quality output.
    - `.solana-new/idea-context.json`
    - `.solana-new/build-context.json`
 2. If either file is missing, tell the user the recommended order first:
-   - `solana-new copilot start "your idea"`
+   - `solana-new copilot "your idea"`
    - `scaffold-project`
    - `build-with-claude`
    - `create-pitch-deck`

@@ -6,8 +6,10 @@ import {
   GRADIENT_SOLANA_DOT_NEW,
 } from "./colors.js";
 import {
+  type AgentCli,
   detectPreferredAgentCli,
   getAgentCliDisplay,
+  getAgentMeta,
   getAgentCliInstallHelp,
 } from "./agent-cli.js";
 
@@ -146,7 +148,7 @@ function buildScreen(selectedPhase: number, selectedSkill: number, rows: number,
   return lines.slice(0, rows);
 }
 
-export async function interactiveJourney(opts: { yolo?: boolean } = {}): Promise<void> {
+export async function interactiveJourney(opts: { yolo?: boolean; agentCli?: AgentCli } = {}): Promise<void> {
   const stdin = process.stdin;
   const stdout = process.stdout;
 
@@ -154,7 +156,7 @@ export async function interactiveJourney(opts: { yolo?: boolean } = {}): Promise
 
   let selectedPhase = 0;
   let selectedSkill = 0;
-  const preferredCli = detectPreferredAgentCli();
+  const preferredCli = opts.agentCli ?? detectPreferredAgentCli();
   const agentLabel = getAgentCliDisplay(preferredCli);
 
   stdin.setRawMode(true);
@@ -204,7 +206,8 @@ export async function interactiveJourney(opts: { yolo?: boolean } = {}): Promise
         child.on("close", () => resolve());
         child.on("error", (err) => {
           if ((err as NodeJS.ErrnoException).code === "ENOENT") {
-            console.log(`  ${agentLabel} not found. Install it: ${getAgentCliInstallHelp()}`);
+            const installHint = getAgentMeta(preferredCli).installHint;
+            console.log(`  ${agentLabel} not found. Install it: ${installHint}`);
             console.log(`  Then run: ${preferredCli} "${prompt}"\n`);
           } else {
             console.error(`  Failed to launch ${agentLabel}: ${err.message}\n`);
@@ -225,7 +228,8 @@ export async function interactiveJourney(opts: { yolo?: boolean } = {}): Promise
       child.on("close", () => resolve());
       child.on("error", (err) => {
         if ((err as NodeJS.ErrnoException).code === "ENOENT") {
-          console.log(`  ${agentLabel} not found. Install it: ${getAgentCliInstallHelp()}`);
+          const installHint = getAgentMeta(preferredCli).installHint;
+          console.log(`  ${agentLabel} not found. Install it: ${installHint}`);
           console.log(`  Then run: ${preferredCli} "${prompt}"\n`);
         } else {
           console.error(`  Failed to launch ${agentLabel}: ${err.message}\n`);

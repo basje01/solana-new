@@ -68,7 +68,7 @@ When a user invokes a downstream skill directly, route them to the required pred
 
 Use this exact order:
 
-1. `solana-new copilot start "your idea"` (or prompt: "What should I build in crypto?")
+1. `solana-new copilot "your idea"` (or prompt: "What should I build in crypto?")
 2. `scaffold-project`
 3. `build-with-claude`
 4. `review-and-iterate`

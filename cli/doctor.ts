@@ -71,14 +71,14 @@ export async function cmdDoctor(agent: boolean): Promise<void> {
   // 3. Copilot token
   const token = getToken();
   if (!token) {
-    checks.push({ label: "Copilot token", status: "warn", detail: "not set — solana-new copilot token" });
+    checks.push({ label: "Copilot token", status: "warn", detail: "not set — solana-new copilot --token" });
   } else {
     try {
       const valid = await verifyToken(token);
       checks.push({
         label: "Copilot token",
         status: valid ? "pass" : "fail",
-        detail: valid ? "valid" : "invalid — solana-new copilot token",
+        detail: valid ? "valid" : "invalid — solana-new copilot --token",
       });
     } catch {
       checks.push({ label: "Copilot token", status: "warn", detail: "could not verify (network error)" });

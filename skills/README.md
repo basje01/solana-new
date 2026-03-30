@@ -61,7 +61,7 @@ You can invoke skills directly, but dependency-sensitive skills now gate on miss
 
 Recommended execution order for best results:
 
-1. `solana-new copilot start "your idea"` (creates idea context)
+1. `solana-new copilot "your idea"` (creates idea context)
 2. `scaffold-project` (creates build context)
 3. `build-with-claude`
 4. `review-and-iterate`
@@ -73,7 +73,7 @@ All skills are **auto-installed** when you run:
 
 ```bash
 solana-new init              # Install all skills to ~/.claude/skills/ and ~/.codex/skills/
-solana-new journey           # Pick a skill → launches Codex/Claude with prompt
+solana-new ship           # Pick a skill → launches Codex/Claude with prompt
 ```
 
 Or just:

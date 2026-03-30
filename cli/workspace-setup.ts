@@ -194,10 +194,10 @@ function generateClaudeMd(input: WorkspaceSetupInput, projectName: string, selec
   }
 
   md += `## Ecosystem Commands\n`;
-  md += `- \`solana-new copilot start "your idea"\` \u2014 landscape + gap analysis\n`;
+  md += `- \`solana-new copilot "your idea"\` \u2014 landscape + gap analysis\n`;
   md += `- \`solana-new search <query>\` \u2014 find repos, skills, MCPs\n`;
   md += `- \`solana-new skills\` \u2014 browse available skills\n`;
-  md += `- \`solana-new journey\` \u2014 Idea \u2192 Build \u2192 Launch guide\n`;
+  md += `- \`solana-new ship\` \u2014 Idea \u2192 Build \u2192 Launch guide\n`;
 
   return md;
 }

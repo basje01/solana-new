@@ -16,7 +16,7 @@ import { interactiveWorkspaceSetup } from "./workspace-setup.js";
 import { getToken, saveToken, readConfig } from "./copilot-auth.js";
 import { verifyToken } from "./copilot-client.js";
 import { renderBanner } from "./banner.js";
-import { detectPreferredAgentCli, normalizeAgentCommand } from "./agent-cli.js";
+import { detectPreferredAgentCli, normalizeAgentCommand, type AgentCli } from "./agent-cli.js";
 import { RESET, DIM, BOLD, CYAN, GREEN, YELLOW, RED, GRADIENT_SOLANA_DASH_NEW } from "./colors.js";
 
 // Read version from package.json
@@ -285,7 +285,7 @@ async function cmdSkills(args: string[]): Promise<void> {
 
 async function cmdCopilotStart(args: string[], flags: Record<string, string | boolean>): Promise<void> {
   if (flags.help === true) {
-    printSubcommandHelp("copilot start", "Onboarding + idea analysis + workspace setup", "solana-new copilot start [text]", [
+    printSubcommandHelp("copilot", "Onboarding + idea analysis + workspace setup", "solana-new copilot [text]", [
       `${BOLD}--agent${RESET}   Machine-readable output`,
     ]);
     return;
@@ -329,82 +329,93 @@ async function verifyAndSave(token: string): Promise<boolean> {
   return valid;
 }
 
+function showCopilotConfig(): void {
+  const config = readConfig();
+  const token = getToken();
+  console.log("");
+  console.log(`  ${BOLD}Colosseum Copilot${RESET} ${DIM}(~/.solana-new/config.json)${RESET}`);
+  console.log("");
+  if (token) {
+    const masked = token.slice(0, 20) + "..." + token.slice(-8);
+    const src = process.env.COLOSSEUM_COPILOT_PAT ? "env" : "config";
+    console.log(`  ${BOLD}copilot-token${RESET}   ${GREEN}set${RESET} ${DIM}(${masked}) [${src}]${RESET}`);
+  } else {
+    console.log(`  ${BOLD}copilot-token${RESET}   ${YELLOW}not set${RESET}  ${DIM}https://arena.colosseum.org/copilot${RESET}`);
+  }
+  if (config.copilotTokenSetAt) {
+    console.log(`  ${BOLD}token-set-at${RESET}    ${DIM}${config.copilotTokenSetAt}${RESET}`);
+  }
+  console.log("");
+  console.log(`  ${DIM}Update / Regenerate at: ${CYAN}https://arena.colosseum.org/copilot${RESET}`);
+  console.log("");
+}
+
+async function updateCopilotToken(tokenValue?: string): Promise<void> {
+  if (!tokenValue) {
+    if (!process.stdin.isTTY) {
+      console.log("Usage: solana-new copilot --token <pat>");
+      return;
+    }
+    const { createInterface } = await import("node:readline");
+    const rl = createInterface({ input: process.stdin, output: process.stdout });
+    console.log("");
+    console.log(`  ${BOLD}Update Colosseum Copilot token${RESET}`);
+    console.log(`  ${DIM}Get a new token: ${CYAN}https://arena.colosseum.org/copilot${RESET}`);
+    console.log("");
+    const answer = await new Promise<string>((resolve) => {
+      rl.question(`  Paste token: `, (a) => { rl.close(); resolve(a.trim()); });
+    });
+    if (!answer) { console.log(`  ${DIM}Cancelled.${RESET}\n`); return; }
+    await verifyAndSave(answer);
+    console.log("");
+    return;
+  }
+  await verifyAndSave(tokenValue);
+}
+
 async function cmdConfig(args: string[]): Promise<void> {
   const { flags, positional } = parseFlags(args);
-  if (flags.help === true && positional[0] === "start") {
-    return cmdCopilotStart(positional.slice(1), flags);
-  }
   if (flags.help === true) {
-    printSubcommandHelp("copilot", "Manage Copilot token + settings", "solana-new copilot [token]", [
-      `${BOLD}start${RESET} [text]   Guided onboarding + free-form idea analysis`,
-      `${BOLD}token${RESET}          Update token (interactive)`,
-      `${BOLD}token${RESET} <pat>    Set token directly`,
+    printSubcommandHelp("copilot", "Onboarding + idea analysis + token settings", "solana-new copilot [text] [--token [pat]]", [
+      `${BOLD}--token${RESET}         Update token (interactive)`,
+      `${BOLD}--token${RESET} <pat>   Set token directly`,
+      `${BOLD}--agent${RESET}         Machine-readable onboarding/idea output`,
     ]);
     return;
   }
 
-  // Support both `copilot token <pat>` and `copilot --token <pat>`
-  const sub = positional[0] || (flags.token ? "token" : undefined);
-  const flagToken = typeof flags.token === "string" ? flags.token : undefined;
-
-  if (!sub || sub === "show") {
-    const config = readConfig();
-    const token = getToken();
-    console.log("");
-    console.log(`  ${BOLD}Colosseum Copilot${RESET} ${DIM}(~/.solana-new/config.json)${RESET}`);
-    console.log("");
-    if (token) {
-      const masked = token.slice(0, 20) + "..." + token.slice(-8);
-      const src = process.env.COLOSSEUM_COPILOT_PAT ? "env" : "config";
-      console.log(`  ${BOLD}copilot-token${RESET}   ${GREEN}set${RESET} ${DIM}(${masked}) [${src}]${RESET}`);
-    } else {
-      console.log(`  ${BOLD}copilot-token${RESET}   ${YELLOW}not set${RESET}  ${DIM}https://arena.colosseum.org/copilot${RESET}`);
-    }
-    if (config.copilotTokenSetAt) {
-      console.log(`  ${BOLD}token-set-at${RESET}    ${DIM}${config.copilotTokenSetAt}${RESET}`);
-    }
-    console.log("");
-    console.log(`  ${DIM}Update / Regenerate at: ${CYAN}https://arena.colosseum.org/copilot${RESET}`);
-    console.log("");
-    return;
-  }
-
-  if (sub === "token") {
-    const tokenValue = positional[1] || flagToken;
-    if (!tokenValue) {
-      const { createInterface } = await import("node:readline");
-      const rl = createInterface({ input: process.stdin, output: process.stdout });
-      console.log("");
-      console.log(`  ${BOLD}Update Colosseum Copilot token${RESET}`);
-      console.log(`  ${DIM}Get a new token: ${CYAN}https://arena.colosseum.org/copilot${RESET}`);
-      console.log("");
-      const answer = await new Promise<string>((resolve) => {
-        rl.question(`  Paste token: `, (a) => { rl.close(); resolve(a.trim()); });
-      });
-      if (!answer) { console.log(`  ${DIM}Cancelled.${RESET}\n`); return; }
-      await verifyAndSave(answer);
-      console.log("");
-      return;
-    }
-    await verifyAndSave(tokenValue);
-    return;
-  }
-
-  if (sub === "start") {
+  // Backward compatibility for old subcommands
+  if (positional[0] === "start") {
     return cmdCopilotStart(positional.slice(1), flags);
   }
+  if (positional[0] === "token") {
+    return updateCopilotToken(positional[1] || (typeof flags.token === "string" ? flags.token : undefined));
+  }
+  if (positional[0] === "show") {
+    showCopilotConfig();
+    return;
+  }
 
-  console.log(`\n  ${BOLD}Usage:${RESET}`);
-  console.log(`    solana-new copilot              Show current config`);
-  console.log(`    solana-new copilot start [text] Guided onboarding + idea analysis`);
-  console.log(`    solana-new copilot token         Update Copilot token (interactive)`);
-  console.log(`    solana-new copilot token <pat>   Set Copilot token directly\n`);
+  if (flags.token !== undefined) {
+    await updateCopilotToken(typeof flags.token === "string" ? flags.token : undefined);
+    return;
+  }
+
+  // Combined command behavior:
+  // - `solana-new copilot` -> show token/config
+  // - `solana-new copilot "idea"` -> onboarding + idea analysis
+  const hasTextInput = positional.length > 0 || typeof flags.agent === "string";
+  if (hasTextInput || flags.agent === true) {
+    return cmdCopilotStart(positional, flags);
+  }
+
+  showCopilotConfig();
 }
 
 // --- Ship ---
 
-function shipAgent(): void {
-  const agentCli = detectPreferredAgentCli() ?? "codex";
+function shipAgent(forcedAgentCli?: AgentCli): void {
+  const agentCli = forcedAgentCli ?? detectPreferredAgentCli() ?? "codex";
   const agentHint = `${agentCli} (or ${agentCli === "codex" ? "claude" : "codex"})`;
   console.log(`Solana Developer Journey — Idea → Build → Launch (Colosseum Hackathon)`);
   console.log(`Use agent CLI: ${agentHint}`);
@@ -453,29 +464,38 @@ function shipAgent(): void {
 
 async function cmdShip(args: string[]): Promise<void> {
   const { flags } = parseFlags(args);
+  const forcedAgentCli: AgentCli | undefined = flags.codex === true ? "codex" : flags.claude === true ? "claude" : undefined;
+  if (flags.codex === true && flags.claude === true) {
+    console.error(`Choose one: --codex or --claude`);
+    process.exitCode = 1;
+    return;
+  }
+
   if (flags.help === true) {
-    printSubcommandHelp("ship", "Idea → Build → Launch guide", "solana-new ship [--yolo]", [
+    printSubcommandHelp("ship", "Idea → Build → Launch guide", "solana-new ship [--yolo] [--codex|--claude]", [
       `${BOLD}--yolo${RESET}    Send prompt directly to your agent CLI (Codex/Claude)`,
+      `${BOLD}--codex${RESET}   Force launching Codex`,
+      `${BOLD}--claude${RESET}  Force launching Claude Code`,
       `${BOLD}--agent${RESET}   Machine-readable output`,
     ]);
     return;
   }
-  warnUnknownFlags(flags, ["yolo"]);
+  warnUnknownFlags(flags, ["yolo", "codex", "claude"]);
 
   if (flags.agent === true) {
-    shipAgent();
+    shipAgent(forcedAgentCli);
     return;
   }
 
   // Interactive TUI
   if (process.stdin.isTTY) {
     const { interactiveJourney } = await import("./interactive-journey.js");
-    await interactiveJourney({ yolo: flags.yolo === true });
+    await interactiveJourney({ yolo: flags.yolo === true, agentCli: forcedAgentCli });
     return;
   }
 
   // Non-TTY fallback
-  shipAgent();
+  shipAgent(forcedAgentCli);
 }
 
 // --- Help ---
@@ -497,7 +517,7 @@ function printUsage(opts: { includeUtilities?: boolean } = {}): void {
   console.log(`  ${BOLD}Get Started${RESET}`);
   console.log("");
   row(`${BOLD}init${RESET}`,       "",                             "Install skills \u2192 open Codex/Claude \u2192 go");
-  row(`${BOLD}ship${RESET}`,       `${DIM}[--yolo]${RESET}`,      "Idea \u2192 Build \u2192 Launch guide");
+  row(`${BOLD}ship${RESET}`,       `${DIM}[--yolo] [--codex|--claude]${RESET}`, "Idea \u2192 Build \u2192 Launch guide");
   console.log("");
   console.log(`  ${BOLD}Discover${RESET}  ${DIM}\u2014 explore the Solana ecosystem${RESET}`);
   console.log("");
@@ -507,8 +527,7 @@ function printUsage(opts: { includeUtilities?: boolean } = {}): void {
   console.log("");
   console.log(`  ${BOLD}Colosseum Copilot${RESET}`);
   console.log("");
-  row(`${BOLD}copilot${RESET}`,    `${DIM}start [text]${RESET}`,   "Guided onboarding + free-form idea analysis");
-  row(`${BOLD}copilot${RESET}`,    `${DIM}[token]${RESET}`,        "Manage Copilot token + settings");
+  row(`${BOLD}copilot${RESET}`,    `${DIM}[text] [--token [pat]]${RESET}`, "Onboarding + idea analysis + token settings");
   console.log("");
   if (includeUtilities) {
     console.log(`  ${BOLD}Utilities${RESET}`);
@@ -568,7 +587,7 @@ async function main(): Promise<void> {
   }
 
   if (command === "start" || command === "idea" || command === "landscape") {
-    console.error(`Command "${command}" was removed. Use: solana-new copilot start [text]`);
+    console.error(`Command "${command}" was removed. Use: solana-new copilot [text]`);
     process.exitCode = 1;
     return;
   }

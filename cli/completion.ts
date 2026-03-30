@@ -20,7 +20,7 @@ _solana_new() {
     'search:Find repos, skills, MCPs'
     'repos:Browse / filter repos'
     'skills:Browse / filter skills'
-    'copilot:Manage Copilot token + settings'
+    'copilot:Onboarding + idea analysis + token settings'
     'feedback:Send feedback to the team'
     'doctor:Check environment setup'
     'uninstall:Remove installed skills'
@@ -38,15 +38,16 @@ _solana_new() {
     args)
       case "\${words[1]}" in
         ship)
-          _arguments '--yolo[Send prompt directly]' '--agent[Machine-readable output]'
+          _arguments '--yolo[Send prompt directly]' '--codex[Force Codex CLI]' '--claude[Force Claude Code CLI]' '--agent[Machine-readable output]'
           ;;
         repos|skills)
           _arguments '--search[Filter by keyword]:query:' '--agent[Machine-readable output]'
           ;;
         copilot)
-          local -a subcmds
-          subcmds=('start:Guided onboarding + idea analysis' 'token:Update Copilot token' 'show:Show current config')
-          _describe -t subcommands 'copilot subcommand' subcmds
+          _arguments \\
+            '--token[Update token interactively or pass PAT]:pat:' \\
+            '--agent[Machine-readable output]' \\
+            '*:text:'
           ;;
         *)
           _arguments '--agent[Machine-readable output]'

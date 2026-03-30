@@ -63,7 +63,7 @@ Setup complete.
 
 Try:
   solana-new ship
-  solana-new copilot start "What should I build on Solana for the Colosseum hackathon?"
+  solana-new copilot "What should I build on Solana for the Colosseum hackathon?"
   codex "What should I build on Solana for the Colosseum hackathon?"
   claude "What should I build on Solana for the Colosseum hackathon?"
 

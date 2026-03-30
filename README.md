@@ -25,9 +25,8 @@ bash ./install.sh
 
 ```
 solana-new init                                   Install journey skills to Codex/Claude
-solana-new ship                                   Idea → Build → Launch TUI
-solana-new copilot start [text]                   Guided onboarding + free-form idea analysis
-solana-new copilot [token]                        Manage Copilot token + settings
+solana-new ship [--yolo] [--codex|--claude]       Idea → Build → Launch TUI
+solana-new copilot [text] [--token [pat]]         Onboarding + idea analysis + token settings
 solana-new search [query]                         Find repos, skills, MCPs
 solana-new repos [--search <q>]                   Browse or filter repos
 solana-new skills [--search <q>]                  Browse or filter skills

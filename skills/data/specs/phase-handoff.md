@@ -150,7 +150,7 @@ When a skill updates an existing context file:
 If a skill expects a context file that doesn't exist:
 
 1. First, tell the user which prerequisite skill should run and why.
-2. Provide exact next-step order (for example: `solana-new copilot start "your idea"` → `scaffold-project` → `build-with-claude`).
+2. Provide exact next-step order (for example: `solana-new copilot "your idea"` → `scaffold-project` → `build-with-claude`).
 3. By default, block dependency-sensitive actions (`deploy-to-mainnet`) until prerequisites are satisfied.
 4. For non-blocking actions (pitch/submission), proceed via interview only if the user explicitly wants to continue.
 5. When proceeding without full context, label unknown values as assumptions/TBD (never fabricate).

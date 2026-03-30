@@ -24,10 +24,10 @@ Prepare a complete, optimized hackathon submission. Write the project descriptio
 Hackathon submissions depend on prior phase outputs.
 
 1. Preferred prerequisites:
-   - `idea-context.json` from `solana-new copilot start`
+   - `idea-context.json` from `solana-new copilot`
    - `build-context.json` from `scaffold-project` and `build-with-claude`
 2. If missing, give the user exact order first:
-   - `solana-new copilot start "your idea"`
+   - `solana-new copilot "your idea"`
    - `scaffold-project`
    - `build-with-claude`
    - `review-and-iterate`

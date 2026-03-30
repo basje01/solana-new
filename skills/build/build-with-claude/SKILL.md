@@ -29,7 +29,7 @@ Guide the user through implementing their Solana MVP feature by feature. Break t
 This skill depends on scaffold output.
 
 1. If `.solana-new/build-context.json` is missing:
-   - Tell the user: "Run `scaffold-project` first (or `solana-new copilot start \"your idea\"` → `scaffold-project`)."
+   - Tell the user: "Run `scaffold-project` first (or `solana-new copilot \"your idea\"` → `scaffold-project`)."
    - Explain that `build-with-claude` needs stack/repo/MCP decisions from scaffold.
 2. If `build-context.json` exists but `stack` is missing, redirect to `scaffold-project`.
 3. Only proceed without scaffold context if the user explicitly asks to continue anyway.

@@ -16,9 +16,8 @@ pnpm dev              # run CLI via tsx (no build needed)
 
 ```bash
 solana-new init                                   # install journey skills → open Codex/Claude → go
-solana-new ship                                   # Idea → Build → Launch TUI
-solana-new copilot start [text]                   # guided onboarding + free-form idea analysis
-solana-new copilot [token]                        # manage Copilot token + settings
+solana-new ship [--yolo] [--codex|--claude]       # Idea → Build → Launch TUI
+solana-new copilot [text] [--token [pat]]         # onboarding + idea analysis + token settings
 solana-new search [query]                         # find repos, skills, MCPs
 solana-new repos [--search <q>]                   # browse or filter repos
 solana-new skills [--search <q>]                  # browse or filter skills
