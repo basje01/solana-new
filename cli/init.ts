@@ -1,9 +1,10 @@
-import { existsSync, mkdirSync, cpSync, writeFileSync, readdirSync } from "node:fs";
+import { existsSync, mkdirSync, cpSync, writeFileSync, readdirSync, rmSync } from "node:fs";
 import { join, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
 import { homedir } from "node:os";
 import { spawn } from "node:child_process";
 import { RESET, DIM, BOLD, CYAN, GREEN, YELLOW, MAGENTA } from "./colors.js";
+import { BINARY_NAME, PRODUCT_NAME, CONTEXT_DIR_NAME } from "./branding.js";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
@@ -81,7 +82,15 @@ function installSkillsGlobal(agent: boolean): { installed: string[]; skipped: st
   const cliDataRootDist = join(__dirname, "data");
   const catalogSrc = existsSync(cliDataRoot) ? cliDataRoot : cliDataRootDist;
 
-  const targets = [join(claudeSkillsDir, "_data"), join(codexSkillsDir, "_data")];
+  // Install to "data/" so SKILL.md relative paths (../../data/decisions/) resolve correctly
+  const targets = [join(claudeSkillsDir, "data"), join(codexSkillsDir, "data")];
+
+  // Clean up legacy _data/ if it exists
+  for (const legacy of [join(claudeSkillsDir, "_data"), join(codexSkillsDir, "_data")]) {
+    if (existsSync(legacy)) {
+      rmSync(legacy, { recursive: true, force: true });
+    }
+  }
 
   for (const dest of targets) {
     if (existsSync(dest)) continue;
@@ -110,8 +119,12 @@ function installSkillsGlobal(agent: boolean): { installed: string[]; skipped: st
 
 function generateProjectClaudeMd(): string {
   let md = `# Solana Project — Colosseum Hackathon\n\n`;
-  md += `## Your Journey: Idea → Build → Launch\n\n`;
+  md += `## Your Journey: Learn → Idea → Build → Launch\n\n`;
   md += `Journey skills are pre-loaded. Just ask naturally.\n\n`;
+
+  md += `### Phase 0: Learn — Solana Fundamentals\n`;
+  md += `- "I'm new to Solana — teach me the fundamentals" — ecosystem, architecture, why Solana\n`;
+  md += `- "What have we learned across sessions?" — review, search, export project learnings\n\n`;
 
   md += `### Phase 1: Idea — Discovery & Planning\n`;
   md += `- "What should I build on Solana for the Colosseum hackathon?" — discover and rank ideas\n`;
@@ -122,26 +135,31 @@ function generateProjectClaudeMd(): string {
   md += `### Phase 2: Build — Solana Implementation\n`;
   md += `- "Scaffold my Solana project with Anchor" — Anchor + SDK project setup\n`;
   md += `- "Help me build the Solana MVP step by step" — guided implementation\n`;
+  md += `- "Deep dive into Solana architecture and Rust" — technical bootcamp\n`;
   md += `- "Build a DeFi protocol on Solana" — AMM, lending, vault with CPIs and PDAs\n`;
   md += `- "Build a Solana Action / Blink" — shareable transaction links\n`;
   md += `- "Launch an SPL token on Solana" — token mint, metadata, distribution\n`;
   md += `- "Build a Solana data pipeline" — indexer, webhook, analytics\n`;
   md += `- "Build a Solana mobile app" — React Native + mobile wallet adapter\n`;
-  md += `- "Debug my failing Solana program" — diagnose program errors and failed TXs\n`;
-  md += `- "Review my Solana program for security" — audit for exploits and best practices\n\n`;
+  md += `- "Roast my product — be harsh" — brutal product critique\n`;
+  md += `- "Review my product's UX" — onboarding, flows, feature completeness\n`;
+  md += `- "Review my Solana program for security" — audit for exploits and best practices\n`;
+  md += `- "Run a CSO security audit" — infrastructure, secrets, deps, OWASP\n`;
+  md += `- "Debug my failing Solana program" — diagnose program errors and failed TXs\n\n`;
 
-  md += `### Phase 3: Launch — Hackathon Submission\n`;
+  md += `### Phase 3: Launch — Go to Market\n`;
   md += `- "Deploy my Solana program to mainnet" — pre-flight checklist + verification\n`;
   md += `- "Create a pitch deck for Colosseum judges" — 12-slide hackathon framework\n`;
-  md += `- "Prepare my Colosseum hackathon submission" — optimized for judges\n\n`;
+  md += `- "Prepare my Colosseum hackathon submission" — optimized for judges\n`;
+  md += `- "Create a marketing video" — Remotion + Renoise video production\n\n`;
 
-  md += `> Each phase writes context to \`.solana-new/\` so the next phase picks up automatically.\n\n`;
+  md += `> Each phase writes context to \`.${PRODUCT_NAME}/\` as markdown so the next phase picks up automatically.\n\n`;
 
   md += `## Ecosystem\n`;
-  md += `- \`solana-new search <query>\` — find repos, skills, MCPs\n`;
-  md += `- \`solana-new repos\` — 59 cloneable Solana repos\n`;
-  md += `- \`solana-new skills\` — 66 ecosystem skills\n`;
-  md += `- \`solana-new mcps\` — 49 MCP servers\n`;
+  md += `- \`${BINARY_NAME} search <query>\` — find repos, skills, MCPs\n`;
+  md += `- \`${BINARY_NAME} repos\` — 59 cloneable Solana repos\n`;
+  md += `- \`${BINARY_NAME} skills\` — 71 ecosystem skills\n`;
+  md += `- \`${BINARY_NAME} mcps\` — 49 MCP servers\n`;
 
   return md;
 }
@@ -156,7 +174,7 @@ export async function cmdInit(args: string[], flags: Record<string, string | boo
 
   if (agent) {
     // Machine-readable output for Claude Code / Codex
-    console.log(`solana-new init — ${total} skills (Colosseum hackathon)`);
+    console.log(`${BINARY_NAME} init — ${total} skills (Colosseum hackathon)`);
     console.log(``);
     if (installed.length > 0) {
       console.log(`Installed ${installed.length} skills to ~/.claude/skills and ~/.codex/skills:`);
@@ -174,7 +192,7 @@ export async function cmdInit(args: string[], flags: Record<string, string | boo
   } else {
     // Human-friendly output
     console.log(``);
-    console.log(`  ${BOLD}solana-new init${RESET}`);
+    console.log(`  ${BOLD}${BINARY_NAME} init${RESET}`);
     console.log(``);
 
     if (installed.length > 0) {
@@ -207,7 +225,7 @@ export async function cmdInit(args: string[], flags: Record<string, string | boo
 
   if (!agent) {
     console.log(`  ${YELLOW}${BOLD}Launch Codex or Claude:${RESET}`);
-    console.log(`  ${MAGENTA}$ solana-new ship${RESET}  ${DIM}pick a skill → opens your available agent CLI${RESET}`);
+    console.log(`  ${MAGENTA}$ ${BINARY_NAME} ship${RESET}  ${DIM}pick a skill → opens your available agent CLI${RESET}`);
     console.log(`  ${MAGENTA}$ codex "What should I build in crypto?"${RESET} ${DIM}(or claude "...")${RESET}`);
     console.log(``);
   }
