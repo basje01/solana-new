@@ -8,13 +8,42 @@ description: Create a structured pitch deck for a crypto project. Use when a use
 ```bash
 _TEL_TIER=$(cat ~/.superstack/config.json 2>/dev/null | grep -o '"telemetryTier":"[^"]*"' | head -1 | cut -d'"' -f4 || echo "off")
 _TEL_TIER="${_TEL_TIER:-off}"
+_TEL_PROMPTED=$([ -f ~/.superstack/.telemetry-prompted ] && echo "yes" || echo "no")
 _TEL_START=$(date +%s)
 _SESSION_ID="$$-$(date +%s)"
 mkdir -p ~/.superstack
+echo "TELEMETRY: $_TEL_TIER"
+echo "TEL_PROMPTED: $_TEL_PROMPTED"
 if [ "$_TEL_TIER" != "off" ]; then
 echo '{"skill":"create-pitch-deck","phase":"launch","event":"started","ts":"'$(date -u +%Y-%m-%dT%H:%M:%SZ)'"}' >> ~/.superstack/telemetry.jsonl 2>/dev/null || true
 fi
 ```
+
+If `TEL_PROMPTED` is `no`: Before starting the skill workflow, ask the user about telemetry.
+Use AskUserQuestion:
+
+> Help superstack get better! We track which skills get used and how long they take —
+> no code, no file paths, no PII. Change anytime in `~/.superstack/config.json`.
+
+Options:
+- A) Sure, help superstack improve (anonymous)
+- B) No thanks
+
+If A: run this bash:
+```bash
+echo '{"telemetryTier":"anonymous"}' > ~/.superstack/config.json
+_TEL_TIER="anonymous"
+touch ~/.superstack/.telemetry-prompted
+```
+
+If B: run this bash:
+```bash
+echo '{"telemetryTier":"off"}' > ~/.superstack/config.json
+_TEL_TIER="off"
+touch ~/.superstack/.telemetry-prompted
+```
+
+This only happens once. If `TEL_PROMPTED` is `yes`, skip this entirely and proceed to the skill workflow.
 
 > **Wrong skill?** See [SKILL_ROUTER.md](../../SKILL_ROUTER.md) for all available skills.
 

@@ -183,6 +183,8 @@ if [ -f "$CONFIG_DIR/config.json" ]; then
 else
   echo "{\"telemetryTier\":\"$TELEMETRY_CHOICE\"}" > "$CONFIG_DIR/config.json"
 fi
+# Mark telemetry as prompted so skills don't ask again
+touch "$CONFIG_DIR/.telemetry-prompted"
 ok "Telemetry: $TELEMETRY_CHOICE"
 
 # --- What gets installed ---
