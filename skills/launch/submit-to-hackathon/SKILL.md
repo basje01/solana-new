@@ -55,7 +55,7 @@ Prepare a complete, optimized hackathon submission. Write the project descriptio
 
 ## Workflow
 
-1. Check for `.superstack/idea-context.json` and `.superstack/build-context.json`. Use all available context.
+1. Check for `.superstack/idea-context.md` and `.superstack/build-context.md`. Use all available context.
 2. If no context, interview: What did you build? What hackathon? Which track/prize?
 3. Read [references/hackathon-submission-guide.md](references/hackathon-submission-guide.md) for formatting and requirements.
 4. Read [references/judging-criteria.md](references/judging-criteria.md) to optimize for what judges look for.
@@ -65,7 +65,7 @@ Prepare a complete, optimized hackathon submission. Write the project descriptio
 
 ## Prior Context (Optional — never block on this)
 
-If `.superstack/idea-context.json` or `.superstack/build-context.json` exist, use them to enrich the submission. If they don't exist, **proceed immediately** — interview the user about their project. Do NOT redirect to other commands.
+If `.superstack/idea-context.md` or `.superstack/build-context.md` exist, use them to enrich the submission. If they don't exist, **proceed immediately** — interview the user about their project. Do NOT redirect to other commands.
 
 ## Non-Negotiables
 

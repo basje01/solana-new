@@ -30,13 +30,7 @@ function detectPhase(): number {
       if (ctx.includes("Devnet deployed | Yes") || ctx.includes("devnet_deployed: true")) return 3; // Launch
     } catch { /* ignore */ }
   }
-  // Fallback: check JSON for backwards compat
-  if (existsSync(`${contextDir}/build-context.json`)) {
-    try {
-      const ctx = JSON.parse(readFileSync(`${contextDir}/build-context.json`, "utf8"));
-      if (ctx?.build_status?.devnet_deployed) return 3; // Launch
-    } catch { /* ignore */ }
-  }
+  // (removed legacy .json fallback — all context files are now .md)
   if (existsSync(`${cwd}/Anchor.toml`)) {
     try {
       const anchor = readFileSync(`${cwd}/Anchor.toml`, "utf8");
@@ -61,7 +55,7 @@ function detectPhase(): number {
   } catch { /* ignore */ }
 
   // Check if idea context exists → Idea phase
-  if (existsSync(`${contextDir}/idea-context.md`) || existsSync(`${contextDir}/idea-context.json`)) {
+  if (existsSync(`${contextDir}/idea-context.md`)) {
     return 1; // Idea
   }
 

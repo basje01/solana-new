@@ -1,6 +1,6 @@
 ---
 name: debug-program
-description: Help a developer debug a failing Solana program or transaction. Use when a user says "debug my program", "program error", "transaction failed", "stuck", "help me fix", "why is this failing", "error code", or "instruction failed". Reads build-context.json if available.
+description: Help a developer debug a failing Solana program or transaction. Use when a user says "debug my program", "program error", "transaction failed", "stuck", "help me fix", "why is this failing", "error code", or "instruction failed". Reads build-context.md if available.
 ---
 
 ## Preamble (run first)
@@ -55,7 +55,7 @@ Systematically diagnose and fix Solana program errors and transaction failures. 
 
 ## Workflow
 
-1. Check for `.superstack/build-context.json` for context on what the user is building.
+1. Check for `.superstack/build-context.md` for context on what the user is building. If not found, gather context from the user and write `.superstack/build-context.md` so future skills can use it.
 2. Get the error: ask for the exact error message, transaction signature, or program logs.
 3. Read [references/debug-workflow.md](references/debug-workflow.md) and follow the systematic debugging process.
 4. If the error matches a known pattern, check [references/common-pitfalls.md](references/common-pitfalls.md) for the exact cause and fix.
@@ -80,8 +80,8 @@ Systematically diagnose and fix Solana program errors and transaction failures. 
 
 This skill is **Phase 2 (Build)** in the Idea → Build → Launch journey.
 
-**Reads**: `.superstack/build-context.json`
-**Updates**: `.superstack/build-context.json` with:
+**Reads**: `.superstack/build-context.md`
+**Writes/Updates**: `.superstack/build-context.md` (creates if missing) with:
 - `debug.issues_resolved`: array of { error, cause, fix }
 - `debug.last_debug_session`: ISO timestamp
 

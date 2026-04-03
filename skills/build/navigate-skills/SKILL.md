@@ -123,9 +123,9 @@ Use this exact order:
 
 Context dependencies:
 
-- `scaffold-project` expects `.superstack/idea-context.json` (or will create it from user interview).
-- `build-with-claude` expects `.superstack/build-context.json` from scaffold.
-- `review-and-iterate` expects `.superstack/build-context.json`.
+- `scaffold-project` expects `.superstack/idea-context.md` (or will create it from user interview).
+- `build-with-claude` expects `.superstack/build-context.md` from scaffold.
+- `review-and-iterate` expects `.superstack/build-context.md`.
 - Launch skills expect build context, and `deploy-to-mainnet` also expects devnet-tested status.
 
 If dependency context is missing, do not pretend it exists. Tell the user the exact next skill to run and why.

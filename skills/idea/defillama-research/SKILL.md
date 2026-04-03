@@ -82,7 +82,7 @@ Use DefiLlama's API to research the DeFi landscape on Solana and across chains. 
 
 This skill is **Phase 1 (Idea)** in the Idea → Build → Launch journey.
 
-After research, update `.superstack/idea-context.json` with a `defi_research` field containing:
+After research, write/update `.superstack/idea-context.md` (create if missing) with a `defi_research` field containing:
 - `top_protocols`: array of { name, tvl, tvl_change_7d, category, chain }
 - `opportunities`: array of identified gaps or underserved niches
 - `recommended_integrations`: protocols with SDKs/APIs worth building on

@@ -1,6 +1,6 @@
 ---
 name: launch-token
-description: Guide a developer through launching a token on Solana. Use when a user says "launch a token", "create a token", "pump.fun", "bonding curve", "token launch", "create a memecoin", or "SPL token". Reads build-context.json from a prior scaffold phase if available.
+description: Guide a developer through launching a token on Solana. Use when a user says "launch a token", "create a token", "pump.fun", "bonding curve", "token launch", "create a memecoin", or "SPL token". Reads build-context.md from a prior scaffold phase if available.
 ---
 
 ## Preamble (run first)
@@ -55,7 +55,7 @@ Walk the user through every step of launching a token on Solana — from choosin
 
 ## Workflow
 
-1. Check for `.superstack/build-context.json`. If found, use stack decisions. If not, ask: what kind of token (meme, utility, governance)? What launch mechanism (Pump.fun, custom bonding curve, direct LP)?
+1. Check for `.superstack/build-context.md`. If found, use stack decisions. If not, ask: what kind of token (meme, utility, governance)? What launch mechanism (Pump.fun, custom bonding curve, direct LP)? Write `.superstack/build-context.md` with the context gathered so future skills can use it.
 2. Read [references/token-launch-patterns.md](references/token-launch-patterns.md) to select the right launch path.
 3. Read [references/tokenomics-checklist.md](references/tokenomics-checklist.md) to validate supply design and distribution.
 4. Guide the user through implementation:
@@ -79,8 +79,8 @@ Walk the user through every step of launching a token on Solana — from choosin
 
 This skill is **Phase 2 (Build)** in the Idea → Build → Launch journey.
 
-**Reads**: `.superstack/build-context.json`
-**Updates**: `.superstack/build-context.json` with:
+**Reads**: `.superstack/build-context.md`
+**Writes/Updates**: `.superstack/build-context.md` (creates if missing) with:
 - `token.mint_address`: string (devnet and mainnet)
 - `token.standard`: "spl-token" | "token-2022"
 - `token.launch_mechanism`: "pumpfun" | "raydium" | "custom" | "direct"

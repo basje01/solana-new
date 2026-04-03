@@ -1,6 +1,6 @@
 ---
 name: create-pitch-deck
-description: Create a structured pitch deck for a crypto project. Use when a user says "create a pitch deck", "help me pitch", "I need slides", "prepare for demo day", "investor presentation", or "grant application". Reads idea-context.json and build-context.json from prior phases if available.
+description: Create a structured pitch deck for a crypto project. Use when a user says "create a pitch deck", "help me pitch", "I need slides", "prepare for demo day", "investor presentation", or "grant application". Reads idea-context.md and build-context.md from prior phases if available.
 ---
 
 ## Preamble (run first)
@@ -55,7 +55,7 @@ Generate a structured pitch deck tailored to the audience (VCs, hackathon judges
 
 ## Workflow
 
-1. Check for `.superstack/idea-context.json` and `.superstack/build-context.json`. Use available context to pre-populate.
+1. Check for `.superstack/idea-context.md` and `.superstack/build-context.md`. Use available context to pre-populate.
 2. If no context, interview the user: What did you build? Who's it for? What traction do you have?
 3. Identify the audience using the interview or user's explicit request.
 4. Read [references/pitch-structure.md](references/pitch-structure.md) for the slide framework.
@@ -65,7 +65,7 @@ Generate a structured pitch deck tailored to the audience (VCs, hackathon judges
 
 ## Prior Context (Optional — never block on this)
 
-If `.superstack/idea-context.json` or `.superstack/build-context.json` exist, use them to enrich the deck. If they don't exist, **proceed immediately** — interview the user about their project. Do NOT redirect to other commands.
+If `.superstack/idea-context.md` or `.superstack/build-context.md` exist, use them to enrich the deck. If they don't exist, **proceed immediately** — interview the user about their project. Do NOT redirect to other commands.
 
 ## Non-Negotiables
 

@@ -1,6 +1,6 @@
 ---
 name: build-defi-protocol
-description: Guide a developer through building a DeFi protocol on Solana. Use when a user says "build a DEX", "AMM", "lending protocol", "vault", "yield", "liquidity pool", "DeFi protocol", "swap program", "build a DeFi app", "perpetual futures", "perps protocol", "leverage trading", or "derivatives". Reads build-context.json from a prior scaffold phase if available.
+description: Guide a developer through building a DeFi protocol on Solana. Use when a user says "build a DEX", "AMM", "lending protocol", "vault", "yield", "liquidity pool", "DeFi protocol", "swap program", "build a DeFi app", "perpetual futures", "perps protocol", "leverage trading", or "derivatives". Reads build-context.md from a prior scaffold phase if available.
 ---
 
 ## Preamble (run first)
@@ -55,7 +55,7 @@ Guide the user through designing and implementing a DeFi protocol on Solana — 
 
 ## Workflow
 
-1. Check for `.superstack/build-context.json`. If found, use stack decisions. If not, ask: what type of DeFi (AMM, lending, vault, yield aggregator)? What's the target scale and composability needs?
+1. Check for `.superstack/build-context.md`. If found, use stack decisions. If not, ask: what type of DeFi (AMM, lending, vault, yield aggregator)? What's the target scale and composability needs? Write `.superstack/build-context.md` with the context gathered so future skills can use it.
 2. Read [references/defi-program-patterns.md](references/defi-program-patterns.md) to select architecture and math primitives.
 3. Read [references/defi-security.md](references/defi-security.md) before writing any program logic — security must be designed in, not bolted on.
 4. Read [references/defi-testing.md](references/defi-testing.md) to set up the testing environment with real liquidity state.
@@ -80,8 +80,8 @@ Guide the user through designing and implementing a DeFi protocol on Solana — 
 
 This skill is **Phase 2 (Build)** in the Idea → Build → Launch journey.
 
-**Reads**: `.superstack/build-context.json`
-**Updates**: `.superstack/build-context.json` with:
+**Reads**: `.superstack/build-context.md`
+**Writes/Updates**: `.superstack/build-context.md` (creates if missing) with:
 - `defi.protocol_type`: "amm" | "lending" | "vault" | "yield" | "custom"
 - `defi.program_id`: string (devnet)
 - `defi.security_review`: "none" | "self" | "audit-firm"

@@ -1,6 +1,6 @@
 ---
 name: deploy-to-mainnet
-description: Guide a Solana project from devnet to mainnet production deployment. Use when a user says "deploy to mainnet", "go to production", "deployment checklist", "prepare for launch", "mainnet deployment", or "ship it". Reads build-context.json from a prior build phase if available.
+description: Guide a Solana project from devnet to mainnet production deployment. Use when a user says "deploy to mainnet", "go to production", "deployment checklist", "prepare for launch", "mainnet deployment", or "ship it". Reads build-context.md from a prior build phase if available.
 ---
 
 ## Preamble (run first)
@@ -55,16 +55,16 @@ Take a devnet-tested Solana project and prepare it for mainnet deployment. Run t
 
 ## Workflow
 
-1. Check for `.superstack/build-context.json`. If found, verify the build status (tests passing, devnet deployed). If not, ask the user about their current state.
+1. Check for `.superstack/build-context.md`. If found, verify the build status (tests passing, devnet deployed). If not, ask the user about their current state.
 2. Run through [references/deployment-checklist.md](references/deployment-checklist.md) item by item.
 3. Help configure production RPC using [references/rpc-provider-guide.md](references/rpc-provider-guide.md).
 4. If deploying a program, follow [references/program-upgrade-guide.md](references/program-upgrade-guide.md).
 5. Write a deployment report HTML artifact.
-6. Update `.superstack/build-context.json` with deployment status.
+6. Update `.superstack/build-context.md` with deployment status.
 
 ## Prior Context (Optional — never block on this)
 
-If `.superstack/build-context.json` exists, check build status and warn if tests aren't passing or devnet hasn't been tested. If it doesn't exist, **proceed immediately** — ask the user: "Have you tested on devnet?" and go from there.
+If `.superstack/build-context.md` exists, check build status and warn if tests aren't passing or devnet hasn't been tested. If it doesn't exist, **proceed immediately** — ask the user: "Have you tested on devnet?" and go from there.
 
 ## Non-Negotiables
 
@@ -79,8 +79,8 @@ If `.superstack/build-context.json` exists, check build status and warn if tests
 
 This skill is **Phase 3 (Launch)** in the Idea → Build → Launch journey.
 
-**Reads**: `.superstack/build-context.json` (from Phase 2)
-**Updates**: `.superstack/build-context.json` with:
+**Reads**: `.superstack/build-context.md` (from Phase 2)
+**Writes/Updates**: `.superstack/build-context.md` (creates if missing) with:
 - `build_status.mainnet_deployed`: true
 - `build_status.mainnet_program_id`: string (if applicable)
 - `build_status.deployment_date`: ISO timestamp

@@ -1,6 +1,6 @@
 ---
 name: validate-idea
-description: Run a structured validation sprint on a crypto startup idea. Use when a user says "validate this idea", "is this worth building", "run a validation sprint", "help me test demand", or "should I build this". Reads idea-context.json from a prior idea phase if available.
+description: Run a structured validation sprint on a crypto startup idea. Use when a user says "validate this idea", "is this worth building", "run a validation sprint", "help me test demand", or "should I build this". Reads idea-context.md from a prior idea phase if available.
 ---
 
 ## Preamble (run first)
@@ -55,7 +55,7 @@ Take an idea (from a prior find-next-crypto-idea session or fresh from the user)
 
 ## Workflow
 
-1. Check for `.superstack/idea-context.json` in the workspace. If found, load the chosen idea. If not, ask the user to describe their idea.
+1. Check for `.superstack/idea-context.md` in the workspace. If found, load the chosen idea. If not, ask the user to describe their idea.
 2. Read [references/validation-framework.md](references/validation-framework.md) for the sprint structure.
 3. Evaluate demand signals using [references/customer-signal-rubric.md](references/customer-signal-rubric.md).
 4. Run the crypto necessity gut-check: "What breaks if you remove the blockchain?"
@@ -76,7 +76,7 @@ Take an idea (from a prior find-next-crypto-idea session or fresh from the user)
 
 This skill is **Phase 1 (Idea)** in the Idea → Build → Launch journey. After completing validation:
 
-1. Update `.superstack/idea-context.json` with a `validation` field containing:
+1. Write/update `.superstack/idea-context.md` (create if missing) with a `validation` field containing:
    - `demand_signals`: array of evidence items
    - `risks`: array of { category, description, severity }
    - `go_no_go`: "go" | "no-go" | "pivot"

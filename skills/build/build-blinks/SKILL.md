@@ -1,6 +1,6 @@
 ---
 name: build-blinks
-description: Guide a developer through building Solana Actions and Blinks. Use when a user says "build a blink", "Solana Action", "shareable transaction", "actions API", "transaction link", or "unfurl a transaction". Reads build-context.json from a prior scaffold phase if available.
+description: Guide a developer through building Solana Actions and Blinks. Use when a user says "build a blink", "Solana Action", "shareable transaction", "actions API", "transaction link", or "unfurl a transaction". Reads build-context.md from a prior scaffold phase if available.
 ---
 
 ## Preamble (run first)
@@ -55,7 +55,7 @@ Walk the user through building Solana Actions (server-side API endpoints that re
 
 ## Workflow
 
-1. Check for `.superstack/build-context.json`. If found, use stack decisions. If not, ask: what action do you want to share (payment, NFT mint, swap, vote, tip, custom)?
+1. Check for `.superstack/build-context.md`. If found, use stack decisions. If not, ask: what action do you want to share (payment, NFT mint, swap, vote, tip, custom)? Write `.superstack/build-context.md` with the context gathered so future skills can use it.
 2. Read [references/actions-spec.md](references/actions-spec.md) to understand the protocol requirements.
 3. Read [references/blinks-patterns.md](references/blinks-patterns.md) to select the right pattern for the use case.
 4. Implement the Action endpoint:
@@ -79,8 +79,8 @@ Walk the user through building Solana Actions (server-side API endpoints that re
 
 This skill is **Phase 2 (Build)** in the Idea → Build → Launch journey.
 
-**Reads**: `.superstack/build-context.json`
-**Updates**: `.superstack/build-context.json` with:
+**Reads**: `.superstack/build-context.md`
+**Writes/Updates**: `.superstack/build-context.md` (creates if missing) with:
 - `blinks.action_url`: string (deployed endpoint)
 - `blinks.action_type`: "payment" | "mint" | "swap" | "vote" | "custom"
 - `blinks.chained`: boolean

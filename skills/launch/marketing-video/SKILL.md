@@ -67,8 +67,8 @@ Create marketing videos for your Solana project using two complementary approach
 ### Step 1: Read project context
 
 Check for prior phase outputs:
-- `.superstack/idea-context.json` — project concept, target audience, value proposition
-- `.superstack/build-context.json` — tech stack, features built, screenshots
+- `.superstack/idea-context.md` — project concept, target audience, value proposition
+- `.superstack/build-context.md` — tech stack, features built, screenshots
 - `pitch-deck/` or any presentation files — existing pitch content
 
 If no context exists, ask the user for:

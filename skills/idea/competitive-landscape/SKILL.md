@@ -55,7 +55,7 @@ Map every relevant competitor, substitute, and adjacent project for a given cryp
 
 ## Workflow
 
-1. Check for `.superstack/idea-context.json` in the workspace. If found, use the chosen idea's domain. If not, ask the user what space to analyze.
+1. Check for `.superstack/idea-context.md` in the workspace. If found, use the chosen idea's domain. If not, ask the user what space to analyze.
 2. Read [references/landscape-mapping.md](references/landscape-mapping.md) for the mapping methodology.
 3. Search the solana-new ecosystem catalogs as described in [references/ecosystem-catalog-guide.md](references/ecosystem-catalog-guide.md).
 4. Assess defensibility using [references/moat-analysis.md](references/moat-analysis.md).
@@ -76,7 +76,7 @@ Map every relevant competitor, substitute, and adjacent project for a given cryp
 
 This skill is **Phase 1 (Idea)** in the Idea → Build → Launch journey. After mapping the landscape:
 
-1. Update `.superstack/idea-context.json` with a `landscape` field containing:
+1. Write/update `.superstack/idea-context.md` (create if missing) with a `landscape` field containing:
    - `direct_competitors`: array of { name, url, status, strength, weakness }
    - `substitutes`: array of { name, approach, why_users_stay }
    - `dead_projects`: array of { name, why_failed }

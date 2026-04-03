@@ -55,7 +55,7 @@ Perform a structured code review of a Solana project. Check for security vulnera
 
 ## Workflow
 
-1. Check for `.superstack/build-context.json` to understand the stack and architecture.
+1. Check for `.superstack/build-context.md` to understand the stack and architecture.
 2. Scan the project structure and identify all Solana-related code.
 3. Apply [references/code-review-rubric.md](references/code-review-rubric.md) for quality scoring.
 4. Check against [references/security-basics.md](references/security-basics.md) for vulnerability patterns.
@@ -64,7 +64,7 @@ Perform a structured code review of a Solana project. Check for security vulnera
 
 ## Prior Context (Optional — never block on this)
 
-If `.superstack/build-context.json` exists, use it for context. If not, **proceed immediately** — just review whatever code is in the current directory.
+If `.superstack/build-context.md` exists, use it for context. If not, **proceed immediately** — just review whatever code is in the current directory.
 
 ## Non-Negotiables
 
@@ -79,7 +79,7 @@ If `.superstack/build-context.json` exists, use it for context. If not, **procee
 
 This skill is **Phase 2 (Build)** in the Idea → Build → Launch journey.
 
-**Updates**: `.superstack/build-context.json` with:
+**Writes/Updates**: `.superstack/build-context.md` (creates if missing) with:
 - `review.security_score`: letter grade A-F
 - `review.quality_score`: letter grade A-F
 - `review.findings`: array of { severity, category, description, fix }
@@ -90,7 +90,7 @@ When the review is clean, tell the user they can proceed to **Phase 3 (Launch)**
 - `create-pitch-deck` — structured pitch deck
 - `submit-to-hackathon` — hackathon submission builder
 
-When updating `build-context.json`, **deep-merge** with existing content — don't overwrite fields from prior phases.
+When updating `build-context.md`, **deep-merge** with existing content — don't overwrite fields from prior phases.
 
 See `../../data/specs/phase-handoff.md` for the full JSON contract.
 

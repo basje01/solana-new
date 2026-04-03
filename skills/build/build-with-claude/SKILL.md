@@ -1,6 +1,6 @@
 ---
 name: build-with-claude
-description: Guide a developer through building their Solana MVP step by step using Claude Code. Use when a user says "help me build this", "start the MVP", "guide me through implementation", "what should I build first", or "walk me through the code". Reads build-context.json from a prior scaffold phase if available.
+description: Guide a developer through building their Solana MVP step by step using Claude Code. Use when a user says "help me build this", "start the MVP", "guide me through implementation", "what should I build first", or "walk me through the code". Reads build-context.md from a prior scaffold phase if available.
 ---
 
 ## Preamble (run first)
@@ -55,7 +55,7 @@ Guide the user through implementing their Solana MVP feature by feature. Break t
 
 ## Workflow
 
-1. Check for `.superstack/build-context.json`. If found, use the stack and architecture decisions. If not, ask what they've set up and what they want to build.
+1. Check for `.superstack/build-context.md`. If found, use the stack and architecture decisions. If not, ask what they've set up and what they want to build. Write `.superstack/build-context.md` with the context gathered so future skills can use it.
 2. Read [references/skill-mcp-usage-guide.md](references/skill-mcp-usage-guide.md) to understand what tools are available BEFORE building.
 3. Read [references/dev-environment-setup.md](references/dev-environment-setup.md) to ensure the dev environment is ready.
 4. Read [references/solana-dev-patterns.md](references/solana-dev-patterns.md) for implementation patterns.
@@ -70,7 +70,7 @@ Guide the user through implementing their Solana MVP feature by feature. Break t
 
 ## Prior Context (Optional — never block on this)
 
-If `.superstack/build-context.json` exists, use the stack and architecture decisions. If it doesn't exist, **proceed immediately** — ask the user what they've set up and what they want to build. Do NOT redirect to scaffold-project or any other command.
+If `.superstack/build-context.md` exists, use the stack and architecture decisions. If it doesn't exist, **proceed immediately** — ask the user what they've set up and what they want to build. Do NOT redirect to scaffold-project or any other command.
 
 ## Non-Negotiables
 
@@ -80,14 +80,14 @@ If `.superstack/build-context.json` exists, use the stack and architecture decis
 - If the user is stuck for more than 2 attempts at the same problem, step back and try a different approach.
 - Use the installed skills and MCPs — they exist to help. Don't reinvent what a skill already provides.
 - Keep explanations short. The user is here to build, not read essays.
-- Optionally update `.superstack/build-context.json` as milestones are completed.
+- Optionally update `.superstack/build-context.md` as milestones are completed.
 
 ## Phase Handoff
 
 This skill is **Phase 2 (Build)** in the Idea → Build → Launch journey.
 
-**Reads**: `.superstack/build-context.json` (from scaffold-project)
-**Updates**: `.superstack/build-context.json` with:
+**Reads**: `.superstack/build-context.md` (from scaffold-project)
+**Writes/Updates**: `.superstack/build-context.md` (creates if missing) with:
 - `build_status.milestones`: array of completed milestones
 - `build_status.mvp_complete`: boolean
 - `build_status.tests_passing`: boolean
@@ -96,7 +96,7 @@ This skill is **Phase 2 (Build)** in the Idea → Build → Launch journey.
 
 When MVP is complete and tests pass, tell the user to proceed to **review-and-iterate** for security audit and production readiness check.
 
-When updating `build-context.json`, **deep-merge** with existing content — don't overwrite fields from prior phases.
+When updating `build-context.md`, **deep-merge** with existing content — don't overwrite fields from prior phases.
 
 See `../../data/specs/phase-handoff.md` for the full JSON contract.
 

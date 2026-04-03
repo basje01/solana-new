@@ -1,6 +1,6 @@
 ---
 name: build-mobile
-description: Guide a developer through building a Solana mobile app. Use when a user says "build a mobile app", "React Native Solana", "Solana mobile", "mobile wallet", "mobile dApp", "Android Solana", or "iOS Solana". Reads build-context.json from a prior scaffold phase if available.
+description: Guide a developer through building a Solana mobile app. Use when a user says "build a mobile app", "React Native Solana", "Solana mobile", "mobile wallet", "mobile dApp", "Android Solana", or "iOS Solana". Reads build-context.md from a prior scaffold phase if available.
 ---
 
 ## Preamble (run first)
@@ -55,7 +55,7 @@ Guide the user through building a Solana mobile application using React Native o
 
 ## Workflow
 
-1. Check for `.superstack/build-context.json`. If found, use stack decisions. If not, ask: what platform (React Native cross-platform, or native Android)? What wallet connection method (MWA, Phantom deep links, embedded wallet)?
+1. Check for `.superstack/build-context.md`. If found, use stack decisions. If not, ask: what platform (React Native cross-platform, or native Android)? What wallet connection method (MWA, Phantom deep links, embedded wallet)? Write `.superstack/build-context.md` with the context gathered so future skills can use it.
 2. Read [references/mobile-architecture.md](references/mobile-architecture.md) to select the right scaffold and SDK approach.
 3. Read [references/mobile-wallet-patterns.md](references/mobile-wallet-patterns.md) for wallet connection and transaction signing patterns.
 4. Implement in milestones:
@@ -79,8 +79,8 @@ Guide the user through building a Solana mobile application using React Native o
 
 This skill is **Phase 2 (Build)** in the Idea → Build → Launch journey.
 
-**Reads**: `.superstack/build-context.json`
-**Updates**: `.superstack/build-context.json` with:
+**Reads**: `.superstack/build-context.md`
+**Writes/Updates**: `.superstack/build-context.md` (creates if missing) with:
 - `mobile.platform`: "react-native" | "kotlin" | "swift"
 - `mobile.wallet_method`: "mwa" | "phantom-deeplink" | "embedded"
 - `mobile.scaffold_repo`: string (repo ID used)

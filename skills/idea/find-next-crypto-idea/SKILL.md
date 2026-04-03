@@ -114,7 +114,7 @@ Interview the user until there is real clarity, not just enthusiasm. Generate th
 
 This skill is **Phase 1 (Idea)** in the Idea → Build → Launch journey. After the user picks a winner from the shortlist:
 
-1. Write `.superstack/idea-context.json` in the project workspace with:
+1. Write `.superstack/idea-context.md` in the project workspace with:
    - `phase`: `"idea"`
    - `completed_at`: ISO timestamp
    - `chosen_idea`: slug, name, one_liner, why_crypto, scores, competitors, mvp_checklist, gtm

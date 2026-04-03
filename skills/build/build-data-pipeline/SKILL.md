@@ -1,6 +1,6 @@
 ---
 name: build-data-pipeline
-description: Guide a developer through building a Solana data pipeline or indexer. Use when a user says "build an indexer", "data pipeline", "analytics", "track transactions", "monitor wallets", "webhook", "index accounts", or "real-time data". Reads build-context.json from a prior scaffold phase if available.
+description: Guide a developer through building a Solana data pipeline or indexer. Use when a user says "build an indexer", "data pipeline", "analytics", "track transactions", "monitor wallets", "webhook", "index accounts", or "real-time data". Reads build-context.md from a prior scaffold phase if available.
 ---
 
 ## Preamble (run first)
@@ -55,7 +55,7 @@ Guide the user through building a data pipeline that ingests, transforms, and st
 
 ## Workflow
 
-1. Check for `.superstack/build-context.json`. If found, use stack decisions. If not, ask: what data do you need (transactions, account state, token transfers, program events)? Real-time, historical, or both?
+1. Check for `.superstack/build-context.md`. If found, use stack decisions. If not, ask: what data do you need (transactions, account state, token transfers, program events)? Real-time, historical, or both? Write `.superstack/build-context.md` with the context gathered so future skills can use it.
 2. Read [references/indexing-patterns.md](references/indexing-patterns.md) to select the right ingestion method.
 3. Read [references/data-storage.md](references/data-storage.md) to design the storage schema.
 4. Implement in milestones:
@@ -80,8 +80,8 @@ Guide the user through building a data pipeline that ingests, transforms, and st
 
 This skill is **Phase 2 (Build)** in the Idea → Build → Launch journey.
 
-**Reads**: `.superstack/build-context.json`
-**Updates**: `.superstack/build-context.json` with:
+**Reads**: `.superstack/build-context.md`
+**Writes/Updates**: `.superstack/build-context.md` (creates if missing) with:
 - `pipeline.ingestion_method`: "webhook" | "websocket" | "geyser" | "rpc-polling"
 - `pipeline.data_types`: string[] (e.g., ["transactions", "account-state", "token-transfers"])
 - `pipeline.storage`: "postgresql" | "redis" | "custom"
