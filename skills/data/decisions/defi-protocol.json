@@ -23,7 +23,7 @@
               "Yes — concentrated liquidity": {
                 "recommendation": "orca-whirlpools",
                 "rationale": "Orca Whirlpools are the leading concentrated liquidity pools on Solana. Best for protocols that need precise price ranges.",
-                "install": "npm install @orca-so/whirlpools-sdk",
+                "install": "npm install @orca-so/whirlpools",
                 "repo": "whirlpools",
                 "mcp": "orca-dex-mcp",
                 "skill": "Orca Whirlpools Skill"
@@ -46,7 +46,7 @@
           "Yes — active management for higher returns": {
             "recommendation": "orca-whirlpools",
             "rationale": "Concentrated liquidity on Orca Whirlpools. Higher capital efficiency but requires monitoring and rebalancing.",
-            "install": "npm install @orca-so/whirlpools-sdk",
+            "install": "npm install @orca-so/whirlpools",
             "repo": "whirlpools",
             "risk": "Impermanent loss is amplified in concentrated ranges. Must rebalance when price moves outside your range."
           },
@@ -65,7 +65,7 @@
         "branches": {
           "Best rate aggregation": {
             "recommendation": "lulo",
-            "rationale": "Lulo automatically routes deposits to the highest-yielding lending protocol (Kamino, Marginfi, Solend, etc.).",
+            "rationale": "Lulo automatically routes deposits to the highest-yielding lending protocol (Kamino, Marginfi, Save, etc.).",
             "install": "Use Lulo SDK or API",
             "mcp": null,
             "skill": "Lulo Lending Aggregator Skill"
