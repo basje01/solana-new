@@ -121,7 +121,7 @@ solana airdrop 5
 - **Which starter repo?** See `references/catalog-recommendations.md` — maps idea types to specific repos.
 - **Which wallet SDK?** Privy for best UX, Unified Wallet Adapter for flexibility, Phantom for simplest integration.
 - **Which RPC?** Helius free tier for development.
-- **Which test framework?** Surfpool for mainnet-state testing, LiteSVM for fast unit tests, Bankrun for integration tests.
+- **Which test framework?** Surfpool for mainnet-state testing, LiteSVM for fast unit tests.
 
 ## Resources
 
