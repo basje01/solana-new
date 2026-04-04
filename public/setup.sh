@@ -1,13 +1,11 @@
 #!/usr/bin/env bash
-# superstack — one-command bootstrap
-# Usage: curl -fsSL https://raw.githubusercontent.com/sendaifun/solana-new-cli/main/install.sh | bash
+# superstack — one-command install
+# Usage: curl -fsSL https://solana.new/setup.sh | bash
 set -euo pipefail
 
 # --- Branding ---
 PRODUCT_NAME="superstack"
-NPM_PACKAGE="superstack"
-GITHUB_REPO="sendaifun/solana-new-cli"
-GITHUB_URL="https://github.com/${GITHUB_REPO}.git"
+BASE_URL="https://solana.new"
 
 # --- Colors ---
 RED='\033[0;31m'
@@ -36,76 +34,74 @@ printf "  ${DIM}Ship on Solana — Idea to Launch${RESET}\n\n"
 # --- Prerequisites ---
 log "Checking prerequisites..."
 
-if ! has_cmd node || ! has_cmd npm; then
-  fail "Node.js and npm are required (>= 20). Install from https://nodejs.org"
+if ! has_cmd curl && ! has_cmd wget; then
+  fail "curl or wget is required"
 fi
 
-NODE_MAJOR=$(node -e "console.log(process.versions.node.split('.')[0])")
-if [ "$NODE_MAJOR" -lt 20 ]; then
-  fail "Node.js >= 20 required (found v$(node -v)). Update: https://nodejs.org"
-fi
-ok "Node.js $(node -v)"
-ok "npm $(npm -v)"
-
-# --- Install superstack globally ---
-if ! has_cmd "$PRODUCT_NAME"; then
-  log "Installing ${PRODUCT_NAME} globally..."
-  if ! npm install -g "$NPM_PACKAGE"; then
-    warn "Global install failed. Will use npx as fallback."
-  fi
-fi
-
-if has_cmd "$PRODUCT_NAME"; then
-  ok "${PRODUCT_NAME} $(${PRODUCT_NAME} --version 2>/dev/null || echo 'installed')"
-fi
-
-# --- Install agent CLIs ---
-AGENT_CLI=""
+# Check for Claude Code
 if has_cmd claude; then
-  AGENT_CLI="claude"
   ok "Claude Code found"
 else
-  log "Installing Claude Code CLI..."
-  if npm install -g @anthropic-ai/claude-code; then
-    AGENT_CLI="claude"
-    ok "Claude Code installed"
-  else
-    warn "Could not install Claude Code. Install later: npm i -g @anthropic-ai/claude-code"
-  fi
+  warn "Claude Code not found. Install: npm i -g @anthropic-ai/claude-code"
 fi
 
-if has_cmd codex; then
-  [ -n "$AGENT_CLI" ] && AGENT_CLI="${AGENT_CLI}+codex" || AGENT_CLI="codex"
-  ok "Codex found"
-else
-  log "Installing Codex CLI..."
-  if npm install -g @openai/codex; then
-    [ -n "$AGENT_CLI" ] && AGENT_CLI="${AGENT_CLI}+codex" || AGENT_CLI="codex"
-    ok "Codex installed"
-  else
-    warn "Could not install Codex. Install later: npm i -g @openai/codex"
-  fi
+# --- Download and install skills ---
+log "Downloading skills..."
+
+SKILLS_DIR="$HOME/.claude/skills"
+CODEX_DIR="$HOME/.codex/skills"
+TMP_DIR=$(mktemp -d)
+
+cleanup() { rm -rf "$TMP_DIR"; }
+trap cleanup EXIT
+
+# Download tarball
+if has_cmd curl; then
+  curl -fsSL "${BASE_URL}/skills.tar.gz" -o "$TMP_DIR/skills.tar.gz"
+elif has_cmd wget; then
+  wget -q "${BASE_URL}/skills.tar.gz" -O "$TMP_DIR/skills.tar.gz"
 fi
 
-# --- Helper to run superstack ---
-run_ss() {
-  if has_cmd "$PRODUCT_NAME"; then
-    "$PRODUCT_NAME" "$@"
-  else
-    npx -y "$NPM_PACKAGE" "$@"
-  fi
-}
-
-# --- Install skills ---
-log "Installing journey skills..."
-mkdir -p "$HOME/.claude/skills" "$HOME/.codex/skills"
-run_ss init
-
-# --- Doctor ---
-log "Running setup checks..."
-if ! run_ss doctor 2>/dev/null; then
-  warn "Doctor reported issues. Run: ${PRODUCT_NAME} doctor"
+if [ ! -f "$TMP_DIR/skills.tar.gz" ]; then
+  fail "Failed to download skills. Check your internet connection."
 fi
+
+ok "Downloaded skills bundle"
+
+# Extract to temp
+tar -xzf "$TMP_DIR/skills.tar.gz" -C "$TMP_DIR"
+ok "Extracted skills"
+
+# --- Install skills to ~/.claude/skills/ ---
+log "Installing skills..."
+
+mkdir -p "$SKILLS_DIR" "$CODEX_DIR"
+
+# Copy each skill as its own directory (how Claude expects them)
+for skill_dir in "$TMP_DIR"/skills/idea/*/  "$TMP_DIR"/skills/build/*/  "$TMP_DIR"/skills/launch/*/; do
+  [ -d "$skill_dir" ] || continue
+  skill_name=$(basename "$skill_dir")
+  cp -Rf "$skill_dir" "$SKILLS_DIR/$skill_name"
+  cp -Rf "$skill_dir" "$CODEX_DIR/$skill_name"
+done
+
+# Copy shared data (decision trees, runbooks, knowledge base)
+mkdir -p "$SKILLS_DIR/${PRODUCT_NAME}-data" "$CODEX_DIR/${PRODUCT_NAME}-data"
+if [ -d "$TMP_DIR/skills/data" ]; then
+  cp -Rf "$TMP_DIR/skills/data/"* "$SKILLS_DIR/${PRODUCT_NAME}-data/"
+  cp -Rf "$TMP_DIR/skills/data/"* "$CODEX_DIR/${PRODUCT_NAME}-data/"
+fi
+
+# Copy skill router
+if [ -f "$TMP_DIR/skills/SKILL_ROUTER.md" ]; then
+  cp -f "$TMP_DIR/skills/SKILL_ROUTER.md" "$SKILLS_DIR/SKILL_ROUTER.md"
+  cp -f "$TMP_DIR/skills/SKILL_ROUTER.md" "$CODEX_DIR/SKILL_ROUTER.md"
+fi
+
+# Count installed skills
+SKILL_COUNT=$(find "$SKILLS_DIR" -name "SKILL.md" -maxdepth 2 | wc -l | tr -d ' ')
+ok "Installed ${SKILL_COUNT} skills to ~/.claude/skills/"
+ok "Installed ${SKILL_COUNT} skills to ~/.codex/skills/"
 
 # --- Telemetry opt-in ---
 printf "\n"
@@ -123,17 +119,18 @@ fi
 
 CONFIG_DIR="$HOME/.${PRODUCT_NAME}"
 mkdir -p "$CONFIG_DIR"
-if [ -f "$CONFIG_DIR/config.json" ]; then
+if [ -f "$CONFIG_DIR/config.json" ] && has_cmd node; then
   node -e "
     const fs = require('fs');
     const p = '$CONFIG_DIR/config.json';
     const c = JSON.parse(fs.readFileSync(p, 'utf8'));
     c.telemetryTier = '$TELEMETRY_CHOICE';
     fs.writeFileSync(p, JSON.stringify(c, null, 2) + '\n');
-  " 2>/dev/null || true
+  " 2>/dev/null || echo "{\"telemetryTier\":\"$TELEMETRY_CHOICE\"}" > "$CONFIG_DIR/config.json"
 else
   echo "{\"telemetryTier\":\"$TELEMETRY_CHOICE\"}" > "$CONFIG_DIR/config.json"
 fi
+touch "$CONFIG_DIR/.telemetry-prompted"
 ok "Telemetry: $TELEMETRY_CHOICE"
 
 # --- What gets installed ---
@@ -165,12 +162,4 @@ printf "    ${CYAN}claude \"/create-pitch-deck Help me pitch to investors\"${RES
 printf "    ${CYAN}claude \"/marketing-video Create a promo video\"${RESET}\n"
 printf "\n"
 printf "  ${DIM}Skills auto-activate based on your prompt. No CLI needed.${RESET}\n"
-printf "\n"
-
-printf "  ${BOLD}Add to Your Repo ${DIM}(Optional)${RESET}\n"
-printf "  ${DIM}Share ${PRODUCT_NAME} with your team — teammates just run setup once.${RESET}\n\n"
-printf "    ${CYAN}./setup --vendor${RESET}\n"
-printf "\n"
-printf "  ${DIM}This copies skills into .claude/skills/${PRODUCT_NAME}/ in your project.${RESET}\n"
-printf "  ${DIM}Commit it, and teammates get everything when they clone your repo.${RESET}\n"
 printf "\n"

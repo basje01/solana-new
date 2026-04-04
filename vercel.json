@@ -1,0 +1,20 @@
+{
+  "buildCommand": "bash scripts/package-skills.sh",
+  "outputDirectory": "public",
+  "headers": [
+    {
+      "source": "/setup.sh",
+      "headers": [
+        { "key": "Content-Type", "value": "text/plain; charset=utf-8" },
+        { "key": "Cache-Control", "value": "public, max-age=300" }
+      ]
+    },
+    {
+      "source": "/skills.tar.gz",
+      "headers": [
+        { "key": "Content-Type", "value": "application/gzip" },
+        { "key": "Cache-Control", "value": "public, max-age=300" }
+      ]
+    }
+  ]
+}

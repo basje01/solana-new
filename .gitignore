@@ -42,6 +42,8 @@ cli/state.ts
 tests/
 scripts/*
 !scripts/bootstrap-agent-setup.sh
+!scripts/package-skills.sh
+public/skills.tar.gz
 shared/utils/
 shared/types/contracts.ts
 shared/types/*.schema.json
