@@ -7,13 +7,13 @@ Step-by-step deployment commands. Referenced by `deploy-to-mainnet`, `scaffold-p
 ```bash
 # Verify tools are installed
 solana --version       # Needs >= 2.0 (Agave)
-anchor --version       # Needs >= 0.30 (1.0.0-rc available) (if using Anchor)
+anchor --version       # Needs >= 1.0.0 (if using Anchor)
 node --version         # Needs >= 20
 cargo --version        # Needs Rust toolchain
 
 # If any are missing:
 # Solana: sh -c "$(curl -sSfL https://release.anza.xyz/stable/install)"
-# Anchor: cargo install --git https://github.com/solana-foundation/anchor anchor-cli
+# Anchor: cargo install avm --git https://github.com/solana-foundation/anchor --locked && avm update
 # Rust: curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 ```
 

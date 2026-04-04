@@ -93,6 +93,6 @@ No chain is perfect. Here's what you should know:
 ## Getting Started
 
 1. Install Solana CLI: `sh -c "$(curl -sSfL https://release.anza.xyz/stable/install)"`
-2. Install Anchor: `cargo install --git https://github.com/solana-foundation/anchor avm --force && avm install latest && avm use latest`
+2. Install Anchor: `cargo install avm --git https://github.com/solana-foundation/anchor --locked && avm update`
 3. Create a project: `anchor init my-project`
 4. Or use `superstack init` to get set up with skills, repos, and tools automatically.

@@ -453,7 +453,7 @@ Anchor is the standard framework for writing Solana programs in Rust. Provides a
 - Book: https://book.anchor-lang.com
 - GitHub: https://github.com/solana-foundation/anchor
 
-**Install:** `cargo install --git https://github.com/solana-foundation/anchor avm --force && avm install latest && avm use latest`
+**Install:** `cargo install avm --git https://github.com/solana-foundation/anchor --locked && avm update`
 
 **npm packages:**
 - `@coral-xyz/anchor` -- TypeScript client for Anchor programs
