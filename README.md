@@ -57,7 +57,7 @@ Add `--agent` to any command for machine-readable plaintext output (for Claude C
 
 ## Journey Skills (auto-installed via `superstack init`)
 
-24 skills across 4 phases — user just asks naturally, right skill activates. Every skill interviews you first (via AskUserQuestion) and never assumes.
+23 skills across 4 phases — user just asks naturally, right skill activates. Every skill interviews you first (via AskUserQuestion) and never assumes.
 
 ### Phase 0: Learn — Solana Fundamentals
 | Skill | Trigger |
@@ -82,7 +82,6 @@ Add `--agent` to any command for machine-readable plaintext output (for Claude C
 | `build-defi-protocol` | "Build a DeFi protocol on Solana" |
 | `build-data-pipeline` | "Build a Solana data pipeline" |
 | `build-mobile` | "Build a Solana mobile app" |
-| `build-blinks` | "Build a Solana Action / Blink" |
 | `launch-token` | "Launch an SPL token on Solana" |
 | `roast-my-product` | "Roast my product — be brutal" |
 | `product-review` | "Review my product's UX and quality" |

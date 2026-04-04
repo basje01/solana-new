@@ -32,7 +32,7 @@ Add `--agent` to any command for machine-readable plaintext output (for Claude C
 
 ## Journey Skills (auto-installed via `superstack init`)
 
-24 skills across 4 phases — user just asks naturally, right skill activates.
+23 skills across 4 phases — user just asks naturally, right skill activates.
 
 | Phase | Skill | Trigger Prompt |
 |-------|-------|---------------|
@@ -48,7 +48,6 @@ Add `--agent` to any command for machine-readable plaintext output (for Claude C
 | Build | `build-defi-protocol` | "Build a DeFi protocol" |
 | Build | `build-data-pipeline` | "Build an indexer" |
 | Build | `build-mobile` | "Build a mobile app" |
-| Build | `build-blinks` | "Build a Solana Action" |
 | Build | `launch-token` | "Launch a token" |
 | Build | `roast-my-product` | "Roast my product — be brutal" |
 | Build | `product-review` | "Review my product's UX" |
@@ -68,7 +67,7 @@ Skills live in `skills/<phase>/<skill-name>/`. To add a new skill, create a fold
 - `skills/data/decisions/wallet-selection.json` — Privy vs Unified Adapter vs Phantom vs Keypair
 - `skills/data/decisions/rpc-selection.json` — Helius vs QuickNode vs Triton vs public
 - `skills/data/decisions/defi-protocol.json` — Jupiter vs Orca vs Raydium vs Drift vs Kamino
-- `skills/data/decisions/testing-framework.json` — Surfpool vs LiteSVM vs Mollusk vs Bankrun
+- `skills/data/decisions/testing-framework.json` — Surfpool vs LiteSVM vs Mollusk
 - `skills/data/decisions/token-standard.json` — SPL Token vs Token-2022
 
 **Shared runbooks** (step-by-step commands):
