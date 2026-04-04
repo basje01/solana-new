@@ -195,6 +195,9 @@ Regional Solana communities across 15+ countries with bounties, grants, and tale
 | `solana-foundation/mpp-sdk` | Machine Payments Protocol — HTTP 402 payment flow for APIs | https://github.com/solana-foundation/mpp-sdk |
 | `solana-foundation/commerce-kit` | E-commerce SDK — payments, checkout, React components | https://github.com/solana-foundation/commerce-kit |
 | `solana-foundation/token-helpers` | Token account utilities — simplified ATA creation across standards | https://github.com/solana-foundation/token-helpers |
+| `blueshift-gg/doppler` | Ultra-optimized oracle program (21 CU per update) | https://github.com/blueshift-gg/doppler |
+| `blueshift-gg/sbpf` | CLI to scaffold, build, debug, and deploy sBPF assembly programs | https://github.com/blueshift-gg/sbpf |
+| `blueshift-gg/sbpf-linker` | Relink BPF binaries into SBPF V0 format for Solana | https://github.com/blueshift-gg/sbpf-linker |
 | `solana-developers/program-examples` | Example Solana programs | https://github.com/solana-developers/program-examples |
 
 ### NFT and Token

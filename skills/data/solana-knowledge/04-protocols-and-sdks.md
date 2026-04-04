@@ -540,6 +540,36 @@ Switchboard provides oracle services for bringing off-chain data on-chain (price
 
 ---
 
+### Doppler -- Ultra-Optimized Oracle (Blueshift)
+
+An oracle program achieving just 21 Compute Units per update — the most efficient oracle on Solana. Supports generic payloads, sequence-based replay protection, and zero external dependencies.
+
+**When to use:** High-frequency price feeds, custom data oracles, or any use case where oracle CU cost matters.
+
+**Key URLs:**
+- GitHub: https://github.com/blueshift-gg/doppler
+
+**Rust crate:**
+- `doppler-sdk` — Oracle SDK for building and submitting updates
+
+---
+
+### SBPF -- sBPF Assembly Toolchain (Blueshift)
+
+CLI tool to scaffold, build, debug, and deploy sBPF assembly programs. Includes a disassembler (ELF → assembly), interactive REPL debugger, and test framework integration (Mollusk or TypeScript).
+
+**When to use:** Writing hand-optimized sBPF assembly programs for maximum performance. Also useful for inspecting compiled program binaries.
+
+**Key URLs:**
+- GitHub: https://github.com/blueshift-gg/sbpf
+- Linker: https://github.com/blueshift-gg/sbpf-linker
+
+**Install:**
+- `cargo install sbpf` — CLI tool
+- `cargo install sbpf-linker` — Relinks BPF binaries into SBPF V0 format
+
+---
+
 ### Kora -- Gasless Transactions (Solana Foundation)
 
 Kora is a production-ready signing infrastructure that enables gasless transactions on Solana. Users can pay fees in any token (USDC, BONK, or custom tokens) instead of requiring SOL. Provides a JSON-RPC API, TypeScript SDK, and Rust library with secure key management, rate limiting, and validation rules.
@@ -685,7 +715,8 @@ const ix = createInitializeTransferFeeConfigInstruction(
 | Wallet (consumer app) | Privy |
 | Program framework | Anchor |
 | Program authority | Squads multisig |
-| Oracle data | Switchboard |
+| Oracle data | Switchboard or Doppler (21 CU) |
+| sBPF assembly tooling | sbpf (Blueshift) |
 | AI agents | Solana Agent Kit |
 | Gasless transactions | Kora (Solana Foundation) |
 | Paid API / 402 flow | MPP SDK (Solana Foundation) |
