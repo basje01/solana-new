@@ -26,11 +26,41 @@ has_cmd() { command -v "$1" >/dev/null 2>&1; }
 
 # --- Parse flags ---
 UPDATE_MODE=false
+UNINSTALL_MODE=false
 for arg in "$@"; do
   case "$arg" in
     --update) UPDATE_MODE=true ;;
+    --uninstall) UNINSTALL_MODE=true ;;
   esac
 done
+
+# --- Uninstall mode ---
+if [ "$UNINSTALL_MODE" = true ]; then
+  printf "\n"
+  printf "  ${CYAN}${BOLD}Uninstalling ${PRODUCT_NAME}...${RESET}\n\n"
+
+  SKILLS_DIR="$HOME/.claude/skills"
+  CODEX_DIR="$HOME/.codex/skills"
+  AGENTS_DIR="$HOME/.agents/skills"
+  CONFIG_DIR="$HOME/.${PRODUCT_NAME}"
+
+  # Read installed skill names from SKILL.md files
+  for dir in "$SKILLS_DIR" "$CODEX_DIR" "$AGENTS_DIR"; do
+    [ -d "$dir" ] || continue
+    for skill in "$dir"/*/SKILL.md; do
+      [ -f "$skill" ] || continue
+      skill_dir=$(dirname "$skill")
+      rm -rf "$skill_dir"
+    done
+    rm -rf "$dir/data" "$dir/SKILL_ROUTER.md"
+  done
+
+  rm -rf "$CONFIG_DIR"
+  ok "Removed skills from ~/.claude/skills/, ~/.codex/skills/, ~/.agents/skills/"
+  ok "Removed config from ~/.$PRODUCT_NAME/"
+  printf "\n  ${DIM}To reinstall: curl -fsSL ${BASE_URL}/setup.sh | bash${RESET}\n\n"
+  exit 0
+fi
 
 # --- Banner ---
 printf "\n"
@@ -133,15 +163,17 @@ if [ -f "$CLAUDE_SETTINGS" ] && has_cmd node; then
     const c = JSON.parse(fs.readFileSync(p, 'utf8'));
     if (!c.permissions) c.permissions = {};
     if (!c.permissions.allow) c.permissions.allow = [];
-    const rule = 'Bash(bash *)';
-    if (!c.permissions.allow.includes(rule)) {
-      c.permissions.allow.push(rule);
+    const rules = ['Bash', 'Read', 'Glob', 'Grep'];
+    for (const rule of rules) {
+      if (!c.permissions.allow.includes(rule)) {
+        c.permissions.allow.push(rule);
+      }
     }
-    fs.writeFileSync(p, JSON.stringify(c, null, 2) + '\n');
+    fs.writeFileSync(p, JSON.stringify(c));
   " 2>/dev/null && ok "Auto-allow skill preambles: enabled" || warn "Could not update Claude settings"
 elif [ ! -f "$CLAUDE_SETTINGS" ]; then
   mkdir -p "$HOME/.claude"
-  echo '{"permissions":{"allow":["Bash(bash *)"]}}' > "$CLAUDE_SETTINGS"
+  echo '{"permissions":{"allow":["Bash","Read","Glob","Grep"]}}' > "$CLAUDE_SETTINGS"
   ok "Auto-allow skill preambles: enabled"
 else
   warn "Node.js needed to update Claude settings. Skill preambles may prompt for approval."
@@ -175,7 +207,7 @@ else
       const c = JSON.parse(fs.readFileSync(p, 'utf8'));
       c.telemetryTier = '$TELEMETRY_CHOICE';
       c.convexUrl = 'https://fastidious-fish-811.convex.cloud';
-      fs.writeFileSync(p, JSON.stringify(c, null, 2) + '\n');
+      fs.writeFileSync(p, JSON.stringify(c));
     " 2>/dev/null || echo "{\"telemetryTier\":\"$TELEMETRY_CHOICE\",\"convexUrl\":\"https://fastidious-fish-811.convex.cloud\"}" > "$CONFIG_DIR/config.json"
   else
     echo "{\"telemetryTier\":\"$TELEMETRY_CHOICE\",\"convexUrl\":\"https://fastidious-fish-811.convex.cloud\"}" > "$CONFIG_DIR/config.json"
@@ -192,7 +224,7 @@ if [ -f "$CONFIG_DIR/config.json" ] && ! grep -q "convexUrl" "$CONFIG_DIR/config
       const p = '$CONFIG_DIR/config.json';
       const c = JSON.parse(fs.readFileSync(p, 'utf8'));
       c.convexUrl = 'https://fastidious-fish-811.convex.cloud';
-      fs.writeFileSync(p, JSON.stringify(c, null, 2) + '\n');
+      fs.writeFileSync(p, JSON.stringify(c));
     " 2>/dev/null || true
   fi
 fi
@@ -233,4 +265,7 @@ printf "\n"
 
 printf "  ${BOLD}Update skills later:${RESET}\n"
 printf "    ${CYAN}curl -fsSL ${BASE_URL}/setup.sh | bash -s -- --update${RESET}\n"
+printf "\n"
+printf "  ${BOLD}Uninstall:${RESET}\n"
+printf "    ${CYAN}curl -fsSL ${BASE_URL}/setup.sh | bash -s -- --uninstall${RESET}\n"
 printf "\n"

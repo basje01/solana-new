@@ -6,9 +6,8 @@ description: Research DeFi protocols and market opportunities using DefiLlama da
 ## Preamble (run first)
 
 ```bash
-_TEL_TIER=$(cat ~/.superstack/config.json 2>/dev/null | grep -o '"telemetryTier":"[^"]*"' | head -1 | cut -d'"' -f4 || echo "anonymous")
+_TEL_TIER=$(cat ~/.superstack/config.json 2>/dev/null | grep -o '"telemetryTier": *"[^"]*"' | head -1 | sed 's/.*"telemetryTier": *"//;s/"$//'  || echo "anonymous")
 _TEL_TIER="${_TEL_TIER:-anonymous}"
-_CONVEX_URL=$(cat ~/.superstack/config.json 2>/dev/null | grep -o '"convexUrl":"[^"]*"' | head -1 | cut -d'"'  -f4 || echo "")
 _TEL_PROMPTED=$([ -f ~/.superstack/.telemetry-prompted ] && echo "yes" || echo "no")
 _TEL_START=$(date +%s)
 _SESSION_ID="$$-$(date +%s)"
@@ -18,7 +17,7 @@ echo "TEL_PROMPTED: $_TEL_PROMPTED"
 if [ "$_TEL_TIER" != "off" ]; then
 _TEL_EVENT='{"skill":"defillama-research","phase":"idea","event":"started","ts":"'$(date -u +%Y-%m-%dT%H:%M:%SZ)'"}' 
 echo "$_TEL_EVENT" >> ~/.superstack/telemetry.jsonl 2>/dev/null || true
-[ -n "$_CONVEX_URL" ] && curl -s -X POST "$_CONVEX_URL/api/mutation" -H "Content-Type: application/json" -d '{"path":"telemetry:track","args":{"skill":"defillama-research","phase":"idea","status":"success","version":"0.2.0","platform":"'$(uname -s)-$(uname -m)'","timestamp":'$(date +%s)000'}}' >/dev/null 2>&1 &
+true
 fi
 ```
 
@@ -139,9 +138,13 @@ Run this bash:
 
 ```bash
 _TEL_END=$(date +%s)
-_TEL_DUR=$(( _TEL_END - _TEL_START ))
+_TEL_DUR=$(( _TEL_END - ${_TEL_START:-$_TEL_END} ))
+_TEL_TIER=$(cat ~/.superstack/config.json 2>/dev/null | grep -o '"telemetryTier": *"[^"]*"' | head -1 | sed 's/.*"telemetryTier": *"//;s/"$//' || echo "anonymous")
+_CONVEX_URL=$(cat ~/.superstack/config.json 2>/dev/null | grep -o '"convexUrl": *"[^"]*"' | head -1 | sed 's/.*"convexUrl": *"//;s/"$//' || echo "")
 if [ "$_TEL_TIER" != "off" ]; then
 echo '{"skill":"defillama-research","phase":"idea","event":"completed","outcome":"OUTCOME","duration_s":"'"$_TEL_DUR"'","session":"'"$_SESSION_ID"'","ts":"'$(date -u +%Y-%m-%dT%H:%M:%SZ)'","platform":"'$(uname -s)-$(uname -m)'"}' >> ~/.superstack/telemetry.jsonl 2>/dev/null || true
+[ -n "$_CONVEX_URL" ] && curl -s -X POST "$_CONVEX_URL/api/mutation" -H "Content-Type: application/json" -d '{"path":"telemetry:track","args":{"skill":"defillama-research","phase":"idea","status":"OUTCOME","durationMs":'$(( _TEL_DUR * 1000 ))',"version":"0.2.0","platform":"'$(uname -s)-$(uname -m)'","timestamp":'$(date +%s)000'}}' >/dev/null 2>&1 &
+true
 fi
 ```
 
