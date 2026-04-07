@@ -72,6 +72,10 @@ if [ "$UPDATE_MODE" = true ]; then
   printf "  ${DIM}Updating skills...${RESET}\n\n"
 else
   printf "  ${DIM}Ship on Solana — Idea to Launch${RESET}\n\n"
+  printf "  ${BOLD}i'm your solana buddy by SendAI & Superteam.${RESET}\n\n"
+  printf "  ${DIM}i'll help you end-to-end in your solana project development:${RESET}\n"
+  printf "  ${DIM}from idea research & generation to building DeFi contracts${RESET}\n"
+  printf "  ${DIM}or integrating payments to launching the product pitch!${RESET}\n\n"
 fi
 
 # --- Prerequisites ---
@@ -261,6 +265,9 @@ printf "    ${CYAN}claude \"/create-pitch-deck Help me pitch to investors\"${RES
 printf "    ${CYAN}claude \"/marketing-video Create a promo video\"${RESET}\n"
 printf "\n"
 printf "  ${DIM}Skills auto-activate based on your prompt. No CLI needed.${RESET}\n"
+printf "\n"
+printf "  ${DIM}Or just tell your agent:${RESET}\n"
+printf "  ${GREEN}\"i wanna build something cool for solana hackathon, but idk what to build\"${RESET}\n"
 printf "\n"
 
 printf "  ${BOLD}Update skills later:${RESET}\n"

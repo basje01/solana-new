@@ -550,10 +550,18 @@ async function main(): Promise<void> {
     return;
   }
 
-  // No args: minimal screen — just tell user to run ship
+  // No args: friendly starter screen
   if (!command) {
     await renderBanner();
-    console.log(`  Run ${BOLD}${BINARY_NAME} ship${RESET} to start.\n`);
+    console.log(`  ${BOLD}i'm your solana buddy by SendAI & Superteam.${RESET}\n`);
+    console.log(`  ${DIM}i'll help you end-to-end in your solana project development:${RESET}`);
+    console.log(`  ${DIM}from idea research & generation to building DeFi contracts${RESET}`);
+    console.log(`  ${DIM}or integrating payments to launching the product pitch!${RESET}\n`);
+    console.log(`  ${BOLD}Get started:${RESET}`);
+    console.log(`  ${CYAN}${BINARY_NAME} ship${RESET}    ${DIM}Idea → Build → Launch sprint${RESET}`);
+    console.log(`  ${CYAN}${BINARY_NAME} init${RESET}    ${DIM}Install skills → open Codex/Claude → go${RESET}\n`);
+    console.log(`  ${DIM}Or just tell your agent:${RESET}`);
+    console.log(`  ${GREEN}"i wanna build something cool for solana hackathon, but idk what to build"${RESET}\n`);
     console.log(`  ${DIM}Use ${BOLD}--help${RESET}${DIM} for all commands.${RESET}\n`);
     return;
   }
