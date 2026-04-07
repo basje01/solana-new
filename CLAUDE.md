@@ -7,7 +7,7 @@ Skills and knowledge base to ship on Solana — Idea to Launch. 25 journey skill
 ## Install
 
 ```bash
-curl -fsSL https://solana-new-cli.vercel.app/setup.sh | bash
+curl -fsSL https://www.solana.new/setup.sh | bash
 ```
 
 ## Usage

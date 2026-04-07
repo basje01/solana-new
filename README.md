@@ -7,7 +7,7 @@ Everything a Solana developer needs — 24 journey skills, 59 repos, 71 ecosyste
 Requirements: [Claude Code](https://claude.ai/code) or [Codex](https://openai.com/codex), Git, and Node.js 20+.
 
 ```bash
-curl -fsSL https://solana-new-cli.vercel.app/setup.sh | bash
+curl -fsSL https://www.solana.new/setup.sh | bash
 ```
 
 **What gets installed:** Skills (Markdown prompts) in `~/.claude/skills/` and `~/.codex/skills/`, Solana knowledge base, guides, and catalog data. Nothing touches your PATH or runs in the background.

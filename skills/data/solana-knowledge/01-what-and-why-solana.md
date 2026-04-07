@@ -237,7 +237,7 @@ The Foundation runs an active grants program funding:
 If you are ready to start building, install superstack skills and ask Claude:
 
 ```bash
-curl -fsSL https://solana-new-cli.vercel.app/setup.sh | bash
+curl -fsSL https://www.solana.new/setup.sh | bash
 claude "/find-next-crypto-idea What should I build?"
 ```
 

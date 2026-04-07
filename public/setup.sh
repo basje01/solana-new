@@ -1,12 +1,12 @@
 #!/usr/bin/env bash
 # superstack — one-command install & update
-# Install: curl -fsSL https://solana-new-cli.vercel.app/setup.sh | bash
-# Update:  curl -fsSL https://solana-new-cli.vercel.app/setup.sh | bash -s -- --update
+# Install: curl -fsSL https://www.solana.new/setup.sh | bash
+# Update:  curl -fsSL https://www.solana.new/setup.sh | bash -s -- --update
 set -euo pipefail
 
 # --- Branding ---
 PRODUCT_NAME="superstack"
-BASE_URL="https://solana-new-cli.vercel.app"
+BASE_URL="https://www.solana.new"
 
 # --- Colors ---
 RED='\033[0;31m'
