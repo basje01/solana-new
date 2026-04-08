@@ -902,6 +902,369 @@
       ],
       "clone_command": "git clone https://github.com/sendaifun/fraction.git",
       "is_template": false
+    },
+    {
+      "id": "magicblock-bolt",
+      "repo": "magicblock-labs/bolt",
+      "description": "BOLT — high-performance composable ECS framework for fully on-chain games and autonomous worlds on Solana",
+      "category": "gaming",
+      "keywords": [
+        "game",
+        "ecs",
+        "bolt",
+        "on-chain",
+        "magicblock",
+        "autonomous-worlds",
+        "entity-component-system"
+      ],
+      "clone_command": "git clone https://github.com/magicblock-labs/bolt.git",
+      "is_template": false
+    },
+    {
+      "id": "magicblock-validator",
+      "repo": "magicblock-labs/magicblock-validator",
+      "description": "Blazing-fast SVM Ephemeral Validator for sub-10ms latency on-chain gaming and real-time apps",
+      "category": "gaming",
+      "keywords": [
+        "validator",
+        "ephemeral",
+        "svm",
+        "magicblock",
+        "latency",
+        "real-time"
+      ],
+      "clone_command": "git clone https://github.com/magicblock-labs/magicblock-validator.git",
+      "is_template": false
+    },
+    {
+      "id": "magicblock-engine-examples",
+      "repo": "magicblock-labs/magicblock-engine-examples",
+      "description": "Ephemeral Rollups integration examples — delegation, undelegation, and on-chain game patterns",
+      "category": "gaming",
+      "keywords": [
+        "example",
+        "ephemeral-rollups",
+        "magicblock",
+        "game",
+        "delegation"
+      ],
+      "clone_command": "git clone https://github.com/magicblock-labs/magicblock-engine-examples.git",
+      "is_template": true
+    },
+    {
+      "id": "magicblock-ephemeral-rollups-sdk",
+      "repo": "magicblock-labs/ephemeral-rollups-sdk",
+      "description": "Rust SDK with convenience utils to prepare Solana programs for executing in Ephemeral Rollups",
+      "category": "gaming",
+      "keywords": [
+        "sdk",
+        "ephemeral-rollups",
+        "rust",
+        "magicblock",
+        "delegation"
+      ],
+      "clone_command": "git clone https://github.com/magicblock-labs/ephemeral-rollups-sdk.git",
+      "is_template": false
+    },
+    {
+      "id": "magicblock-delegation-program",
+      "repo": "magicblock-labs/delegation-program",
+      "description": "On-chain delegation mechanism — entrypoint for Ephemeral Rollups account delegation on Solana",
+      "category": "gaming",
+      "keywords": [
+        "delegation",
+        "ephemeral-rollups",
+        "on-chain",
+        "magicblock",
+        "program"
+      ],
+      "clone_command": "git clone https://github.com/magicblock-labs/delegation-program.git",
+      "is_template": false
+    },
+    {
+      "id": "magicblock-super-smart-contracts",
+      "repo": "magicblock-labs/super-smart-contracts",
+      "description": "Solana Super Smart Contracts — enhanced program capabilities with MagicBlock's ephemeral infrastructure",
+      "category": "gaming",
+      "keywords": [
+        "smart-contracts",
+        "super",
+        "magicblock",
+        "program",
+        "ephemeral"
+      ],
+      "clone_command": "git clone https://github.com/magicblock-labs/super-smart-contracts.git",
+      "is_template": false
+    },
+    {
+      "id": "magicblock-soar",
+      "repo": "magicblock-labs/SOAR",
+      "description": "SOAR — Solana On-chain Achievements and Rankings for game leaderboards and reward systems",
+      "category": "gaming",
+      "keywords": [
+        "soar",
+        "achievements",
+        "rankings",
+        "leaderboard",
+        "game",
+        "rewards",
+        "magicblock"
+      ],
+      "clone_command": "git clone https://github.com/magicblock-labs/SOAR.git",
+      "is_template": false
+    },
+    {
+      "id": "magicblock-starter-kits",
+      "repo": "magicblock-labs/starter-kits",
+      "description": "MagicBlock starter kits for building on-chain games and real-time apps with Ephemeral Rollups",
+      "category": "gaming",
+      "keywords": [
+        "starter",
+        "template",
+        "magicblock",
+        "game",
+        "ephemeral-rollups"
+      ],
+      "clone_command": "git clone https://github.com/magicblock-labs/starter-kits.git",
+      "is_template": true
+    },
+    {
+      "id": "magicblock-ephemeral-vrf",
+      "repo": "magicblock-labs/ephemeral-vrf",
+      "description": "Verifiable Random Function (VRF) implementation for Solana — provable on-chain randomness",
+      "category": "gaming",
+      "keywords": [
+        "vrf",
+        "randomness",
+        "verifiable",
+        "magicblock",
+        "on-chain"
+      ],
+      "clone_command": "git clone https://github.com/magicblock-labs/ephemeral-vrf.git",
+      "is_template": false
+    },
+    {
+      "id": "magicblock-real-time-pricing-oracle",
+      "repo": "magicblock-labs/real-time-pricing-oracle",
+      "description": "Low-latency pricing oracle for Ephemeral Rollups — real-time price feeds for on-chain games and DeFi",
+      "category": "gaming",
+      "keywords": [
+        "oracle",
+        "price",
+        "real-time",
+        "magicblock",
+        "ephemeral-rollups"
+      ],
+      "clone_command": "git clone https://github.com/magicblock-labs/real-time-pricing-oracle.git",
+      "is_template": false
+    },
+    {
+      "id": "magicblock-mirage",
+      "repo": "magicblock-labs/mirage",
+      "description": "Mirage CLI for private payments, wallet funding, and Solana transactions using Private Ephemeral Rollups",
+      "category": "gaming",
+      "keywords": [
+        "private-payments",
+        "per",
+        "mirage",
+        "magicblock",
+        "cli",
+        "wallet"
+      ],
+      "clone_command": "git clone https://github.com/magicblock-labs/mirage.git",
+      "is_template": false
+    },
+    {
+      "id": "magicblock-ephemeral-spl-token",
+      "repo": "magicblock-labs/ephemeral-spl-token",
+      "description": "Native SPL token delegation for Private Ephemeral Rollups — confidential token deposits, transfers, and withdrawals",
+      "category": "gaming",
+      "keywords": [
+        "spl-token",
+        "private",
+        "per",
+        "magicblock",
+        "ephemeral-rollups",
+        "confidential"
+      ],
+      "clone_command": "git clone https://github.com/magicblock-labs/ephemeral-spl-token.git",
+      "is_template": false
+    },
+    {
+      "id": "magicblock-session-keys",
+      "repo": "magicblock-labs/session-keys",
+      "description": "Session Key programs for gasless transactions in on-chain games on Solana",
+      "category": "gaming",
+      "keywords": [
+        "session-keys",
+        "gasless",
+        "magicblock",
+        "game",
+        "ux"
+      ],
+      "clone_command": "git clone https://github.com/magicblock-labs/session-keys.git",
+      "is_template": false
+    },
+    {
+      "id": "magicblock-solana-rpcx",
+      "repo": "magicblock-labs/solana-rpcx",
+      "description": "Solana RpcX — enhanced RPC utilities for working with Ephemeral Rollups and the MagicBlock validator",
+      "category": "gaming",
+      "keywords": [
+        "rpc",
+        "rpcx",
+        "magicblock",
+        "utilities",
+        "typescript"
+      ],
+      "clone_command": "git clone https://github.com/magicblock-labs/solana-rpcx.git",
+      "is_template": false
+    },
+    {
+      "id": "jupiter-cli",
+      "repo": "jup-ag/cli",
+      "description": "Jupiter CLI — non-interactive LLM-friendly terminal for spot trading, perps, lending, and prediction markets on Solana",
+      "category": "defi",
+      "keywords": [
+        "jupiter",
+        "cli",
+        "swap",
+        "perps",
+        "lend",
+        "trading",
+        "terminal"
+      ],
+      "clone_command": "npm i -g @jup-ag/cli",
+      "is_template": false
+    },
+    {
+      "id": "jupiter-swap-api-client",
+      "repo": "jup-ag/jupiter-swap-api-client",
+      "description": "Jupiter Swap API client for Rust and TypeScript — quote, build, and execute swaps programmatically",
+      "category": "defi",
+      "keywords": [
+        "jupiter",
+        "swap",
+        "api",
+        "client",
+        "sdk",
+        "rust",
+        "typescript"
+      ],
+      "clone_command": "git clone https://github.com/jup-ag/jupiter-swap-api-client.git",
+      "is_template": false
+    },
+    {
+      "id": "jupiter-cpi",
+      "repo": "jup-ag/jupiter-cpi",
+      "description": "Anchor CPI client for the Jupiter program — integrate Jupiter swaps directly into Solana programs",
+      "category": "defi",
+      "keywords": [
+        "jupiter",
+        "cpi",
+        "anchor",
+        "swap",
+        "program",
+        "on-chain"
+      ],
+      "clone_command": "git clone https://github.com/jup-ag/jupiter-cpi.git",
+      "is_template": false
+    },
+    {
+      "id": "jupiter-sol-swap-cpi",
+      "repo": "jup-ag/sol-swap-cpi",
+      "description": "Swap any token to SOL via Jupiter CPI when the user has no SOL — gasless swap pattern",
+      "category": "defi",
+      "keywords": [
+        "jupiter",
+        "cpi",
+        "sol",
+        "swap",
+        "gasless"
+      ],
+      "clone_command": "git clone https://github.com/jup-ag/sol-swap-cpi.git",
+      "is_template": true
+    },
+    {
+      "id": "jupiter-instruction-parser",
+      "repo": "jup-ag/instruction-parser",
+      "description": "Instruction parser for Jupiter — decode and analyze Jupiter swap transactions",
+      "category": "defi",
+      "keywords": [
+        "jupiter",
+        "parser",
+        "instruction",
+        "decode",
+        "analytics"
+      ],
+      "clone_command": "git clone https://github.com/jup-ag/instruction-parser.git",
+      "is_template": false
+    },
+    {
+      "id": "jupiter-quote-api-node",
+      "repo": "jup-ag/jupiter-quote-api-node",
+      "description": "Jupiter Quote API Node.js client — get optimal swap routes and quotes",
+      "category": "defi",
+      "keywords": [
+        "jupiter",
+        "quote",
+        "api",
+        "node",
+        "routing",
+        "swap"
+      ],
+      "clone_command": "git clone https://github.com/jup-ag/jupiter-quote-api-node.git",
+      "is_template": false
+    },
+    {
+      "id": "jupiter-agent-skills",
+      "repo": "jup-ag/agent-skills",
+      "description": "Official Jupiter skills for AI coding agents — integration guidance for swaps, lending, perps, and prediction markets",
+      "category": "defi",
+      "keywords": [
+        "jupiter",
+        "skills",
+        "agent",
+        "ai",
+        "integration"
+      ],
+      "clone_command": "git clone https://github.com/jup-ag/agent-skills.git",
+      "is_template": false
+    },
+    {
+      "id": "kamino-klend-sdk",
+      "repo": "Kamino-Finance/klend-sdk",
+      "description": "Kamino Lend TypeScript SDK — compose on-chain transactions for deposits, borrows, repayments, withdrawals, and yield strategies",
+      "category": "defi",
+      "keywords": [
+        "kamino",
+        "lending",
+        "borrow",
+        "earn",
+        "sdk",
+        "defi",
+        "yield"
+      ],
+      "clone_command": "git clone https://github.com/Kamino-Finance/klend-sdk.git",
+      "is_template": false
+    },
+    {
+      "id": "loopscale-client",
+      "repo": "palindrome-eng/loopscale-client",
+      "description": "Rust, CPI, and JS clients for Loopscale — modular order book-based lending protocol on Solana with fixed-rate borrowing and Loops leverage",
+      "category": "defi",
+      "keywords": [
+        "loopscale",
+        "lending",
+        "borrow",
+        "fixed-rate",
+        "leverage",
+        "loops",
+        "orderbook",
+        "defi"
+      ],
+      "clone_command": "git clone https://github.com/palindrome-eng/loopscale-client.git",
+      "is_template": false
     }
   ]
 }
