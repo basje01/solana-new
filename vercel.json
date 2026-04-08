@@ -1,6 +1,13 @@
 {
   "buildCommand": "bash scripts/package-skills.sh",
   "outputDirectory": "public",
+  "redirects": [
+    {
+      "source": "/",
+      "destination": "https://github.com/sendaifun/solana-new",
+      "permanent": false
+    }
+  ],
   "headers": [
     {
       "source": "/setup.sh",
