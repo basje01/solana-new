@@ -166,7 +166,10 @@ This is a conversation, not a questionnaire. Start with the anchor questions. Pu
     - If they have screenshots: Get them in the highest resolution possible
     - If they have NOTHING: "No worries. I'll set up a visual system — we'll use SVG icons, a generated color palette, and animated text to build the video."
 
-11. **"Any specific text that MUST appear? Tagline, URL, metric, hackathon name?"**
+11. **"Do you have a preferred writing tone for text overlays and captions? Lowercase and casual, or polished and proper?"**
+    Why: Text overlays and post copy should match the founder's voice. Read [../tone-guide.md](../tone-guide.md) for defaults.
+
+12. **"Any specific text that MUST appear? Tagline, URL, metric, hackathon name?"**
     Why: Some text is non-negotiable (sponsor logos, hackathon branding, product URL).
 
 **Round 5 — The Constraint (ask if needed):**
@@ -184,6 +187,18 @@ This is a conversation, not a questionnaire. Start with the anchor questions. Pu
 - **No false praise.** If their video concept is too ambitious for a 15s Twitter clip, say so. If their product doesn't have a clear visual story yet, help them find one.
 - **Never ask about animation preferences.** Users don't know what `spring damping` means and shouldn't need to. Ask about FEEL, not technique. You translate taste → technique.
 - **3 questions max per message.** Don't dump all 13 questions at once. Conversational rounds.
+
+### Step 2.5: Live Research (mandatory before creative direction)
+
+Every metric shown in a video must be current. Before producing the creative brief, research:
+
+- Pull current TVL, volume, user counts for the product and its competitors using web search or MCP tools (DefiLlama, CoinGecko)
+- Get the latest ecosystem stats relevant to the hook (eg. total Solana perps volume, number of tokens launched on pump.fun, etc.)
+- Verify any numbers the user mentioned in the interview
+
+**Every number that appears as text in the video must come from this research pass.** Outdated metrics in a video are worse than no metrics.
+
+**Check for recent hacks/exploits.** Don't reference hacked protocols positively. Verify before citing any protocol as a competitor or comparison.
 
 ### Step 3: Creative Direction (You Decide, User Approves)
 
@@ -463,6 +478,9 @@ For every video project, deliver:
 6. **Post copy** — suggested tweet/caption text for each platform
 
 ## Resources
+
+### Writing Tone
+- [../tone-guide.md](../tone-guide.md) — Default writing tone for text overlays, captions, and post copy. **Ask the user's tone preference** during the interview. Covers casing, sentence style, and format-specific notes for video text and social copy.
 
 ### references/
 - [references/scene-templates.md](references/scene-templates.md) — **16 pre-built LEGO-block scenes** + 3 full composition recipes. Mix and match: hooks, problems, demos, metrics, CTAs, testimonials, terminals, logo reveals

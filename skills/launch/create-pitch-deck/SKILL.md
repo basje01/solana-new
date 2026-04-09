@@ -59,6 +59,10 @@ Generate a compelling, investor-ready pitch deck using proven frameworks from Se
 
 This skill doesn't just generate slides — it coaches you through building a narrative that lands.
 
+## Core Principles
+
+Hackathon judges review hundreds of submissions quickly and often skim for the essentials. Capture attention in the first 30 seconds with a punchy one-liner using a sharp, relatable analogy that instantly clarifies the idea — "HIP-3 for Solana", "Jupiter for lending", "Uber for compute". Follow immediately with a crisp, high-quality demo that shows the working product in action. Structure the deck as a simple narrative: clearly explain the problem, the innovative solution, and the business model or path to users. Skip stiff slide templates — focus on storytelling. Keep everything short, visually polished, aesthetic, and easy to scan. Draw inspiration from top competitors on design and flow. Clarity and impact win every time.
+
 ## Non-Negotiables (Read First)
 
 - **Never skip the interview.** Don't auto-generate from context files alone. Every pitch needs a human conversation to find the real story.
@@ -89,6 +93,34 @@ cat package.json 2>/dev/null | grep -E '"name"|"description"' | head -5
 ```
 
 If you find useful context, mention it during the interview: "I see from your idea-context that you're building X for Y — let's start from there."
+
+### Phase 1.5: Live Research (mandatory before deck generation)
+
+Every deck needs real, current numbers. Never use stale data from context files or training data alone. Before generating any slides, run a research pass for the specific idea:
+
+**Market data:**
+- Use DefiLlama MCP or web search to pull current TVL, volume, and protocol stats for the relevant category
+- Get competitor TVL/volume/user numbers as of today, not from memory
+- Pull total market size data (perps volume, lending TVL, stablecoin market cap, etc.)
+
+**Competitor landscape:**
+- Identify the 3-5 closest competitors and get their current metrics
+- Check what's launched in the last 3 months in this space
+- Note any recent funding rounds, partnerships, or shutdowns
+
+**Ecosystem data:**
+- Solana-specific stats: total TVL, DEX volume, number of active programs, relevant Pyth feeds
+- Any recent ecosystem announcements or regulatory changes that affect the idea
+
+**How to research:**
+- Use web search, DefiLlama MCP, CoinGecko MCP, or any available data tools
+- If MCP tools are unavailable, use web search as fallback
+- Cross-reference at least 2 sources for key numbers
+- Mark any numbers you couldn't verify as "~estimate" in the deck
+
+**Every number in the deck must come from this research pass, not from the interview or context files alone.** If a stat is outdated or unverifiable, either update it or mark it clearly.
+
+**Check for recent hacks/exploits.** Before citing any protocol as a competitor, integration, or reference point, verify it hasn't been recently compromised. Don't reference hacked protocols positively in the deck.
 
 ### Phase 2: Deep Interview
 
@@ -137,7 +169,10 @@ This is a conversation, not a form. Start with anchor questions, pull deeper bas
 
 **Round 4 — Taste & Positioning (ask if needed):**
 
-10. **"Have you seen a pitch or deck you loved? Any industry."**
+10. **"Do you have a preferred writing tone? Some folks want lowercase and casual, others want polished and corporate."**
+    *Why:* The tone of slide text, speaking notes, and social copy should match the founder's voice — not sound AI-generated. Read [../tone-guide.md](../tone-guide.md) for defaults if they have no preference.
+
+11. **"Have you seen a pitch or deck you loved? Any industry."**
     *Why:* Reveals their quality bar and communication style. If they name something, use it as a reference. If not, offer: "Clean and minimal like Airbnb's 10-slider? Data-heavy like Coinbase's seed deck? Story-driven like Buffer?"
 
 11. **"Do you have brand colors? If not, what's the vibe — corporate and trustworthy, or bold and consumer?"**
@@ -236,6 +271,9 @@ For each objection, provide a 2-sentence response framework.
 If `.superstack/idea-context.md` or `.superstack/build-context.md` exist, use them to enrich the deck. If they don't exist, **proceed immediately** — interview the user about their project. Do NOT redirect to other commands.
 
 ## Resources
+
+### Writing Tone
+- [../tone-guide.md](../tone-guide.md) — Default writing tone for generated content. **Ask the user's tone preference** during the interview before generating final output. Covers casing, sentence style, what to avoid, and format-specific notes for slides, speaking notes, and social copy.
 
 ### references/ — Content & Strategy
 - [references/pitch-structure.md](references/pitch-structure.md) — Sequoia/YC/Kawasaki hybrid slide framework
