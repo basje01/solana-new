@@ -519,6 +519,16 @@
       "setup_command": "codex mcp add --transport http dflow-docs https://pond.dflow.net/mcp",
       "url": "https://pond.dflow.net/mcp",
       "keywords": ["dflow", "docs", "official", "trading", "prediction-markets", "phantom", "kalshi"]
+    },
+    {
+      "id": "alchemy-mcp",
+      "name": "Alchemy MCP (Official)",
+      "repo": "alchemyplatform/alchemy-mcp-server",
+      "description": "Official Alchemy MCP — token prices, balances, NFT data, transaction history, swaps, and smart contract interactions across Solana and EVM chains",
+      "category": "infrastructure",
+      "setup_command": "claude mcp add alchemy --transport http https://mcp.alchemy.com/mcp",
+      "url": "https://github.com/alchemyplatform/alchemy-mcp-server",
+      "keywords": ["alchemy", "rpc", "infrastructure", "token", "nft", "balance", "transaction", "swap", "multi-chain"]
     }
   ]
 }
