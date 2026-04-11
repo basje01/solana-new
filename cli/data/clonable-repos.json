@@ -872,22 +872,6 @@
       "is_template": false
     },
     {
-      "id": "polymarket-indexer",
-      "repo": "sendaifun/polymarket-indexer",
-      "description": "Rust indexer and API for Polymarket prediction markets data",
-      "category": "agent",
-      "keywords": [
-        "polymarket",
-        "prediction",
-        "indexer",
-        "rust",
-        "api",
-        "data"
-      ],
-      "clone_command": "git clone https://github.com/sendaifun/polymarket-indexer.git",
-      "is_template": false
-    },
-    {
       "id": "fraction",
       "repo": "sendaifun/fraction",
       "description": "Fraction by SendAI — fractional ownership and token distribution on Solana",
