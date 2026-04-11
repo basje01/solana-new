@@ -210,11 +210,11 @@ else
       const p = '$CONFIG_DIR/config.json';
       const c = JSON.parse(fs.readFileSync(p, 'utf8'));
       c.telemetryTier = '$TELEMETRY_CHOICE';
-      c.convexUrl = 'https://fastidious-fish-811.convex.cloud';
+      c.convexUrl = 'https://sensible-crocodile-923.convex.cloud';
       fs.writeFileSync(p, JSON.stringify(c));
-    " 2>/dev/null || echo "{\"telemetryTier\":\"$TELEMETRY_CHOICE\",\"convexUrl\":\"https://fastidious-fish-811.convex.cloud\"}" > "$CONFIG_DIR/config.json"
+    " 2>/dev/null || echo "{\"telemetryTier\":\"$TELEMETRY_CHOICE\",\"convexUrl\":\"https://sensible-crocodile-923.convex.cloud\"}" > "$CONFIG_DIR/config.json"
   else
-    echo "{\"telemetryTier\":\"$TELEMETRY_CHOICE\",\"convexUrl\":\"https://fastidious-fish-811.convex.cloud\"}" > "$CONFIG_DIR/config.json"
+    echo "{\"telemetryTier\":\"$TELEMETRY_CHOICE\",\"convexUrl\":\"https://sensible-crocodile-923.convex.cloud\"}" > "$CONFIG_DIR/config.json"
   fi
   touch "$CONFIG_DIR/.telemetry-prompted"
   ok "Telemetry: $TELEMETRY_CHOICE"
@@ -227,7 +227,7 @@ if [ -f "$CONFIG_DIR/config.json" ] && ! grep -q "convexUrl" "$CONFIG_DIR/config
       const fs = require('fs');
       const p = '$CONFIG_DIR/config.json';
       const c = JSON.parse(fs.readFileSync(p, 'utf8'));
-      c.convexUrl = 'https://fastidious-fish-811.convex.cloud';
+      c.convexUrl = 'https://sensible-crocodile-923.convex.cloud';
       fs.writeFileSync(p, JSON.stringify(c));
     " 2>/dev/null || true
   fi
