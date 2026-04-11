@@ -1416,6 +1416,197 @@
       ],
       "clone_command": "git clone https://github.com/MeteoraAg/dlmm-sdk.git",
       "is_template": false
+    },
+    {
+      "id": "doppler",
+      "repo": "blueshift-gg/doppler",
+      "description": "Ultra-optimized oracle program for Solana — 21 CU per update, zero dependencies, no_std Rust",
+      "category": "infrastructure",
+      "keywords": [
+        "oracle",
+        "performance",
+        "blueshift",
+        "zero-copy",
+        "price-feed"
+      ],
+      "clone_command": "git clone https://github.com/blueshift-gg/doppler.git",
+      "is_template": false
+    },
+    {
+      "id": "sbpf",
+      "repo": "blueshift-gg/sbpf",
+      "description": "CLI to bootstrap, build, deploy, and debug sBPF assembly programs on Solana — includes disassembler and debugger",
+      "category": "tooling",
+      "keywords": [
+        "sbpf",
+        "assembly",
+        "bytecode",
+        "blueshift",
+        "optimization",
+        "debug"
+      ],
+      "clone_command": "git clone https://github.com/blueshift-gg/sbpf.git",
+      "is_template": false
+    },
+    {
+      "id": "awesome-sbpf",
+      "repo": "deanmlittle/awesome-sbpf",
+      "description": "Curated collection of sBPF assembly resources, tooling, documentation, and example programs for Solana",
+      "category": "example",
+      "keywords": [
+        "sbpf",
+        "assembly",
+        "awesome",
+        "resources",
+        "optimization",
+        "reference"
+      ],
+      "clone_command": "git clone https://github.com/deanmlittle/awesome-sbpf.git",
+      "is_template": false
+    },
+    {
+      "id": "anchor-escrow-2024",
+      "repo": "deanmlittle/anchor-escrow-2024",
+      "description": "Canonical Anchor escrow program example — the most-referenced escrow tutorial in the Solana ecosystem",
+      "category": "example",
+      "keywords": [
+        "anchor",
+        "escrow",
+        "example",
+        "tutorial",
+        "program"
+      ],
+      "clone_command": "git clone https://github.com/deanmlittle/anchor-escrow-2024.git",
+      "is_template": true
+    },
+    {
+      "id": "beethoven",
+      "repo": "blueshift-gg/beethoven",
+      "description": "Protocol-agnostic CPI routing — one deposit/swap/borrow instruction routes to Kamino, Jupiter, Marginfi, and more",
+      "category": "defi",
+      "keywords": [
+        "cpi",
+        "routing",
+        "composability",
+        "blueshift",
+        "defi",
+        "protocol-agnostic"
+      ],
+      "clone_command": "git clone https://github.com/blueshift-gg/beethoven.git",
+      "is_template": false
+    },
+    {
+      "id": "scilla",
+      "repo": "blueshift-gg/Scilla",
+      "description": "Interactive Solana CLI with prompted navigation — account inspection, cluster state, staking, and developer tools",
+      "category": "tooling",
+      "keywords": [
+        "cli",
+        "interactive",
+        "blueshift",
+        "developer",
+        "solana",
+        "tools"
+      ],
+      "clone_command": "git clone https://github.com/blueshift-gg/Scilla.git",
+      "is_template": false
+    },
+    {
+      "id": "svm-merkle-tree",
+      "repo": "deanmlittle/svm-merkle-tree",
+      "description": "SVM-optimized Merkle tree with syscalls, Bitcoin parity, multiple hash functions, truncated hashes, CLI and WASM bindings",
+      "category": "tooling",
+      "keywords": [
+        "merkle",
+        "tree",
+        "proof",
+        "airdrop",
+        "compression",
+        "hash"
+      ],
+      "clone_command": "git clone https://github.com/deanmlittle/svm-merkle-tree.git",
+      "is_template": false
+    },
+    {
+      "id": "chadbuffer",
+      "repo": "deanmlittle/chadbuffer",
+      "description": "Parallel data upload to Solana with self-healing state and priority fees — 2.7kb program size",
+      "category": "tooling",
+      "keywords": [
+        "upload",
+        "data",
+        "parallel",
+        "buffer",
+        "on-chain"
+      ],
+      "clone_command": "git clone https://github.com/deanmlittle/chadbuffer.git",
+      "is_template": false
+    },
+    {
+      "id": "sbpf-asm-abort",
+      "repo": "deanmlittle/sbpf-asm-abort",
+      "description": "352-byte emergency abort program — shuts down any upgradable Solana program in one transaction",
+      "category": "tooling",
+      "keywords": [
+        "abort",
+        "emergency",
+        "shutdown",
+        "security",
+        "sbpf",
+        "safety"
+      ],
+      "clone_command": "git clone https://github.com/deanmlittle/sbpf-asm-abort.git",
+      "is_template": false
+    },
+    {
+      "id": "idlgen",
+      "repo": "deanmlittle/idlgen",
+      "description": "Generate CPI and introspection SDKs from Anchor IDL files — complements Codama for client generation",
+      "category": "tooling",
+      "keywords": [
+        "idl",
+        "codegen",
+        "cpi",
+        "anchor",
+        "sdk",
+        "introspection"
+      ],
+      "clone_command": "git clone https://github.com/deanmlittle/idlgen.git",
+      "is_template": false
+    },
+    {
+      "id": "solana-secp256k1",
+      "repo": "deanmlittle/solana-secp256k1",
+      "description": "200x CU reduction for secp256k1 operations on Solana — enables efficient Bitcoin/Ethereum signature verification on-chain",
+      "category": "infrastructure",
+      "keywords": [
+        "secp256k1",
+        "cryptography",
+        "bitcoin",
+        "ethereum",
+        "cross-chain",
+        "signature"
+      ],
+      "clone_command": "git clone https://github.com/deanmlittle/solana-secp256k1.git",
+      "is_template": false
+    },
+    {
+      "id": "quasar-svm",
+      "repo": "blueshift-gg/quasar-svm",
+      "description": "In-process SVM execution for Rust, Node.js, and Python — test Solana programs locally without RPC or validators",
+      "category": "tooling",
+      "keywords": [
+        "test",
+        "svm",
+        "local",
+        "quasar",
+        "blueshift",
+        "rust",
+        "typescript",
+        "python"
+      ],
+      "clone_command": "git clone https://github.com/blueshift-gg/quasar-svm.git",
+      "is_template": false
     }
   ]
 }
