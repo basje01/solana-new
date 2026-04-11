@@ -1,5 +1,4 @@
 # superstack
-
 [![solana.new](https://img.shields.io/badge/solana.new-Install-black?logo=solana&logoColor=white)](https://solana.new)
 [![Skills](https://img.shields.io/badge/skills-73-blueviolet)](#ecosystem-catalog)
 [![Repos](https://img.shields.io/badge/repos-81-blue)](#ecosystem-catalog)
@@ -9,6 +8,8 @@
 The open-source platform behind [solana.new](https://solana.new) — 25 journey skills that take you from "what should I build?" to a shipped, funded product on Solana. Backed by 81 repos, 73 ecosystem skills, 53 MCP servers, 515+ curated ideas, and a comprehensive Solana knowledge base.
 
 Works with [Claude Code](https://claude.ai/code) and [Codex](https://openai.com/index/codex/).
+
+<img width="5760" height="3240" alt="solana-new-gh" src="https://github.com/user-attachments/assets/54b1ba0e-eaf9-4dfd-b733-8509aba73ff5" />
 
 ## Install
 
