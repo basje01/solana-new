@@ -114,6 +114,70 @@ Use the RPC client and transport pattern that matches the chosen stack/template:
 - use a dedicated RPC provider for mobile production traffic
 - add timeout, retry, reconnect, and fresh-blockhash handling for mobile network conditions
 
+### Current Kit-Based Pattern (from `skr-staking`)
+
+A good default structure for newer Kit-based React Native apps is:
+
+```typescript
+import { Slot } from 'expo-router';
+import { MobileWalletProvider, createSolanaMainnet } from '@wallet-ui/react-native-kit';
+
+const cluster = createSolanaMainnet({
+  url: process.env.EXPO_PUBLIC_RPC_URL || 'https://api.mainnet-beta.solana.com',
+  label: 'Solana Mainnet',
+});
+
+const identity = {
+  name: 'My Mobile App',
+  uri: 'https://myapp.com/',
+};
+
+export default function Layout() {
+  return (
+    <MobileWalletProvider cluster={cluster} identity={identity}>
+      <Slot />
+    </MobileWalletProvider>
+  );
+}
+```
+
+For data access and PDA derivation, the current Kit-style pattern is:
+
+```typescript
+import {
+  address,
+  createSolanaRpc,
+  getAddressEncoder,
+  getProgramDerivedAddress,
+  getUtf8Encoder,
+} from '@solana/kit';
+
+const rpc = createSolanaRpc(
+  process.env.EXPO_PUBLIC_RPC_URL || 'https://api.mainnet-beta.solana.com'
+);
+
+const PROGRAM_ID = address('YourProgram111111111111111111111111111111111');
+
+async function derivePda(userAddress: string) {
+  const encoder = getAddressEncoder();
+  const [pda] = await getProgramDerivedAddress({
+    programAddress: PROGRAM_ID,
+    seeds: [
+      getUtf8Encoder().encode('profile'),
+      encoder.encode(address(userAddress)),
+    ],
+  });
+  return pda;
+}
+```
+
+This is the pattern to copy for new mobile apps using Kit:
+- `MobileWalletProvider` at the layout/root level
+- cluster configuration via `createSolanaMainnet(...)`
+- RPC access via `createSolanaRpc(...)`
+- addresses/PDAs via `address(...)` and `getProgramDerivedAddress(...)`
+- keep `polyfill.js` imported before the app entrypoint
+
 **MCPs:** `helius-mcp` (60+ tools for RPC, DAS API, webhooks — use for production RPC)
 
 ## Handling Mobile-Specific Challenges

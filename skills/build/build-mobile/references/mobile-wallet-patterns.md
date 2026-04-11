@@ -59,6 +59,23 @@ Recommended default for this skill:
 - for Kit-based apps, follow the current `skr-staking` sample as the reference implementation
 - for web3.js-based apps, follow the official Solana Mobile docs/examples until the chosen template has moved to Kit
 
+Current Kit-based mobile pattern to copy into new apps:
+- wallet access via `useMobileWallet()` from `@wallet-ui/react-native-kit`
+- cluster/provider setup at the layout level via `MobileWalletProvider`
+- RPC reads via `createSolanaRpc(...)` from `@solana/kit`
+- on-chain address/PDA helpers via `address(...)`, `getAddressEncoder(...)`, and `getProgramDerivedAddress(...)`
+- program instruction construction via generated clients or Kit-compatible builders
+- transaction submission through the wallet hook rather than old ad hoc web3.js transaction examples
+
+A minimal mental model for Kit-based apps is:
+```typescript
+const { connect, disconnect, sendTransaction, account } = useMobileWallet();
+const rpc = createSolanaRpc(process.env.EXPO_PUBLIC_RPC_URL || 'https://api.mainnet-beta.solana.com');
+const connectedWalletAddress = account?.address ?? null;
+```
+
+This is the pattern used by newer mobile samples and is the preferred direction for new React Native apps.
+
 This skill should treat Kit as the preferred direction for new mobile examples, while keeping web3.js as a compatibility path where the current official docs/sample still require it.
 
 ### Sign Multiple Transactions
